@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:background="@drawable/bg_gradient"
+    android:gravity="center_horizontal"
+    android:weightSum="1">
+
+    <!--  Sample Dashboard screen with Two buttons -->
+    <!--  Button to view all users screen -->
+    <Button android:id="@+id/btnViewUsers"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="25dip"
+        android:text="@string/View_Users"
+        android:layout_marginTop="25dip"
+        android:layout_weight="0.14" />
+
+    <!--  Button to create a new product screen -->
+    <Button android:id="@+id/btnAddUser"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="25dip"
+        android:text="@string/Add_User"
+        android:layout_marginTop="25dip"
+        android:layout_weight="0.14" />
+
+</LinearLayout>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.wojtekadam.mirae" >
+    <uses-sdk android:minSdkVersion="8" />
+    <application
+        android:configChanges="keyboardHidden|orientation"
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:theme="@style/AppTheme"
+        android:label="@string/app_name">
+        <activity
+            android:name="com.wojtekadam.mirae.MainScreenActivity"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- All User Activity -->
+        <activity
+            android:name=".AllUsersActivity"
+            android:label="All Users"
+            >
+        </activity>
+
+        <!-- Add User Activity-->
+        <activity
+            android:name=".NewUserActivity"
+            android:label="Add New User" >
+        </activity>
+
+        <!-- Edit User Activity-->
+        <activity
+
+            android:name=".EditUserActivity"
+            android:label="Edit User" >
+        </activity>
+
+    </application>
+
+    <!--  Internet Permissions -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
+</manifest>
+
+

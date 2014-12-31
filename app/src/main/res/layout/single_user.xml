@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_gradient"
+    android:orientation="vertical" >
+
+    <!-- Product id (pid) - will be HIDDEN - used to pass to other activity -->
+    <TextView
+        android:id="@+id/eid"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:visibility="gone" />
+
+    <!-- Name Label -->
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:paddingTop="6dip"
+        android:paddingLeft="6dip"
+        android:textSize="17dip"
+        android:textStyle="bold" />
+
+</LinearLayout>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:background="@drawable/bg_gradient"
+    android:layout_height="match_parent">
+
+    <!-- eid Label -->
+    <TextView android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/UserID"
+        android:textColor="@color/pomaranczowy"
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip"
+        android:paddingTop="10dip"
+        android:textSize="25dip"/>
+
+    <!-- Input title -->
+    <EditText android:id="@+id/EditEid"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:layout_margin="5dip"
+        android:layout_marginBottom="15dip"
+        android:singleLine="true"
+        android:textSize="25dip"
+        android:inputType="numberDecimal"/>
+
+    <!-- Title Label -->
+    <TextView android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/Title"
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip"
+        android:paddingTop="10dip"
+        android:textColor="@color/pomaranczowy"
+        android:textSize="25dip"/>
+
+    <!-- Input Title -->
+    <EditText android:id="@+id/EditTitle"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dip"
+        android:textColor="@color/white"
+        android:layout_marginBottom="15dip"
+        android:textSize="25dip"
+        android:singleLine="true"/>
+
+    <LinearLayout android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <!-- Button Create User -->
+        <Button android:id="@+id/btnSave"
+            android:layout_width="193dp"
+            android:layout_height="100dp"
+            android:textColor="@color/white"
+            android:textSize="25dip"
+            android:text="@string/SaveChanges" />
+
+        <!-- Button Delete Product -->
+        <Button android:id="@+id/btnDelete"
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:textColor="@color/white"
+            android:textSize="25dip"
+            android:text="@string/Delete" />
+    </LinearLayout>
+
+</LinearLayout>

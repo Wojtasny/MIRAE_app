@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">MIRAE</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="View_Users">Zobacz użytkowników</string>
+    <string name="Add_User">Dodaj nowego użytkownika</string>
+    <string name="title_activity_all_users">AllUsersActivity</string>
+    <string name="UserID">EID</string>
+    <string name="Title">Tytuł epizodu</string>
+    <string name="SaveChanges">Zapisz</string>
+    <string name="Delete">Usuń</string>
+    <string name="CreateNew">Dodaj do bazy</string>
+    <string name="ProgressDialogEdit">Ładowanie danych. Proszę czekać...</string>
+    <string name="ProgressDialogSaveUser">Zapisywanie danych użytkownika...</string>
+    <string name="ProgressDialogDeletingUser">Usuwanie wpisu...</string>
+    <string name="PorgressDialogCreatingUser">Tworzenie wpisu...</string>
+    <string name="ProgressDialogLoadingUsers">Ładowanie danych. Proszę czekać...</string>
+
+</resources>
