@@ -31,19 +31,22 @@ public class AllUsersActivity extends ListActivity {
     // Creating JSON Parser object
     JSONParser jParser = new JSONParser();
 
-    ArrayList<HashMap<String, String>> usersList;
+    ArrayList<HashMap<String, String>> patientsList;
 
     // url to get all products list
-    private static String url_all_users = "http://pluton.kt.agh.edu.pl/~wwrobel/get_all_users.php";
+    private static String url_all_patients = "http://pluton.kt.agh.edu.pl/~wwrobel/get_all_users.php";
 
     // JSON Node names
     private static final String TAG_SUCCESS = "success";
-    private static final String TAG_USERS = "users";
-    private static final String TAG_EID = "eid";
-    private static final String TAG_TITLE = "title";
+    private static final String TAG_PATIENTS = "patients";
+    private static final String TAG_NAME = "name";
+    private static final String TAG_SURNAME = "surname";
+    private static final String TAG_PESEL = "pesel";
+    private static final String TAG_PHONE = "phone";
+    private static final String TAG_ADDRESS = "address";
 
     // products JSONArray
-    JSONArray users = null;
+    JSONArray patients = null;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -51,10 +54,10 @@ public class AllUsersActivity extends ListActivity {
         setContentView(R.layout.all_users);
 
         // Hashmap for ListView
-        usersList = new ArrayList<HashMap<String, String>>();
+        patientsList = new ArrayList<HashMap<String, String>>();
 
         // Loading products in Background Thread
-        new LoadAllProducts().execute();
+        new LoadAllPatients().execute();
 
         // Get listview
         ListView lv = getListView();
@@ -67,14 +70,14 @@ public class AllUsersActivity extends ListActivity {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
                 // getting values from selected ListItem
-                String eid = ((TextView) view.findViewById(R.id.eid)).getText()
+                String PESEL = ((TextView) view.findViewById(R.id.pesel)).getText()
                         .toString();
 
                 // Starting new intent
                 Intent in = new Intent(getApplicationContext(),
                         EditUserActivity.class);
                 // sending pid to next activity
-                in.putExtra(TAG_EID, eid);
+                in.putExtra(TAG_PESEL, PESEL);
 
                 // starting new activity and expecting some response back
                 startActivityForResult(in, 100);
@@ -102,7 +105,7 @@ public class AllUsersActivity extends ListActivity {
     /**
      * Background Async Task to Load all product by making HTTP Request
      * */
-    class LoadAllProducts extends AsyncTask<String, String, String> {
+    class LoadAllPatients extends AsyncTask<String, String, String> {
 
         /**
          * Before starting background thread Show Progress Dialog
@@ -113,7 +116,7 @@ public class AllUsersActivity extends ListActivity {
             pDialog = new ProgressDialog(AllUsersActivity.this);
             pDialog.setMessage(getString(R.string.ProgressDialogLoadingUsers));
             pDialog.setIndeterminate(false);
-            pDialog.setCancelable(false);
+            pDialog.setCancelable(true);
             pDialog.show();
         }
 
@@ -124,10 +127,10 @@ public class AllUsersActivity extends ListActivity {
             // Building Parameters
             List<NameValuePair> params = new ArrayList<NameValuePair>();
             // getting JSON string from URL
-            JSONObject json = jParser.makeHttpRequest(url_all_users, "GET", params);
+            JSONObject json = jParser.makeHttpRequest(url_all_patients, "GET", params);
 
             // Check your log cat for JSON reponse
-            Log.d("All Users: ", json.toString());
+            Log.d("All Patients: ", json.toString());
 
             try {
                 // Checking for SUCCESS TAG
@@ -136,29 +139,35 @@ public class AllUsersActivity extends ListActivity {
                 if (success == 1) {
                     // products found
                     // Getting Array of Products
-                    users = json.getJSONArray(TAG_USERS);
+                    patients = json.getJSONArray(TAG_PATIENTS);
 
                     // looping through All Products
-                    for (int i = 0; i < users.length(); i++) {
-                        JSONObject c = users.getJSONObject(i);
+                    for (int i = 0; i < patients.length(); i++) {
+                        JSONObject c = patients.getJSONObject(i);
 
                         // Storing each json item in variable
-                        String id = c.getString(TAG_EID);
-                        String title = c.getString(TAG_TITLE);
+                        String name = c.getString(TAG_NAME);
+                        String surname = c.getString(TAG_SURNAME);
+                        String pesel = c.getString(TAG_PESEL);
+                        String phone = c.getString(TAG_PHONE);
+                        String address = c.getString(TAG_ADDRESS);
 
                         // creating new HashMap
                         HashMap<String, String> map = new HashMap<String, String>();
 
                         // adding each child node to HashMap key => value
-                        map.put(TAG_EID, id);
-                        map.put(TAG_TITLE, title);
+                        map.put(TAG_NAME, name);
+                        map.put(TAG_SURNAME, surname);
+                        map.put(TAG_PESEL, pesel);
+                        map.put(TAG_PHONE, phone);
+                        map.put(TAG_ADDRESS, address);
 
                         // adding HashList to ArrayList
-                        usersList.add(map);
+                        patientsList.add(map);
                     }
                 } else {
-                    // no products found
-                    // Launch Add New product Activity
+                    // no patient found
+                    // Launch Add New patient Activity
                     Intent i = new Intent(getApplicationContext(),
                             NewUserActivity.class);
                     // Closing all previous activities
@@ -185,10 +194,10 @@ public class AllUsersActivity extends ListActivity {
                      * Updating parsed JSON data into ListView
                      * */
                     ListAdapter adapter = new SimpleAdapter(
-                            AllUsersActivity.this, usersList,
-                            R.layout.single_user, new String[] { TAG_EID,
-                            TAG_TITLE},
-                            new int[] { R.id.eid, R.id.title });
+                            AllUsersActivity.this, patientsList,
+                            R.layout.single_user, new String[] { TAG_NAME,
+                            TAG_SURNAME, TAG_PESEL, TAG_PHONE, TAG_ADDRESS},
+                            new int[] { R.id.name, R.id.surname, R.id.pesel, R.id.phone, R.id.address });
                     // updating listview
                     setListAdapter(adapter);
                 }
