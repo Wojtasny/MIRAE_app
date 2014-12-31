@@ -5,18 +5,60 @@
     android:layout_height="match_parent"
     android:weightSum="1">
 
-    <!-- eid Label -->
+    <!-- name Label -->
     <TextView android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/UserID"
+        android:text="@string/Name"
         android:textColor="@color/pomaranczowy"
         android:paddingLeft="10dip"
         android:paddingRight="10dip"
         android:paddingTop="10dip"
         android:textSize="25dip"/>
 
-    <!-- Input title -->
-    <EditText android:id="@+id/inputEid"
+    <!-- Input name -->
+    <EditText android:id="@+id/inputNAME"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dip"
+        android:layout_marginBottom="15dip"
+        android:singleLine="true"
+        android:textColor="@color/white"
+        android:textSize="25dip"
+        android:inputType="textPersonName"/>
+
+    <!-- Surname Label -->
+    <TextView android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/Surname"
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip"
+        android:paddingTop="10dip"
+        android:textColor="@color/pomaranczowy"
+        android:textSize="25dip"/>
+
+    <!-- Input Surname -->
+    <EditText android:id="@+id/inputSURNAME"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dip"
+        android:layout_marginBottom="15dip"
+        android:textColor="@color/white"
+        android:textSize="25dip"
+        android:singleLine="true"
+        android:inputType="textPersonName"/>
+
+    <!-- pesel Label -->
+    <TextView android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/PESEL"
+        android:textColor="@color/pomaranczowy"
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip"
+        android:paddingTop="10dip"
+        android:textSize="25dip"/>
+
+    <!-- Input PESEL -->
+    <EditText android:id="@+id/inputPESEL"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dip"
@@ -26,18 +68,39 @@
         android:textSize="25dip"
         android:inputType="numberDecimal"/>
 
-    <!-- Title Label -->
+    <!-- Phone Label -->
     <TextView android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/Title"
+        android:text="@string/Phone"
         android:paddingLeft="10dip"
         android:paddingRight="10dip"
         android:paddingTop="10dip"
         android:textColor="@color/pomaranczowy"
         android:textSize="25dip"/>
 
-    <!-- Input Title -->
-    <EditText android:id="@+id/inputTitle"
+    <!-- Input Phone -->
+    <EditText android:id="@+id/inputPHONE"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dip"
+        android:layout_marginBottom="15dip"
+        android:textColor="@color/white"
+        android:textSize="25dip"
+        android:singleLine="true"
+        android:inputType="phone"/>
+
+    <!-- Address Label -->
+    <TextView android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/Address"
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip"
+        android:paddingTop="10dip"
+        android:textColor="@color/pomaranczowy"
+        android:textSize="25dip"/>
+
+    <!-- Input Phone -->
+    <EditText android:id="@+id/inputADDRESS"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dip"

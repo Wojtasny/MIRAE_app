@@ -24,12 +24,15 @@ public class NewUserActivity extends Activity {
     private ProgressDialog pDialog;
 
     JSONParser jsonParser = new JSONParser();
-    EditText inputEid;
-    EditText inputTitle;
+    EditText inputNAME;
+    EditText inputSURNAME;
+    EditText inputPESEL;
+    EditText inputPHONE;
+    EditText inputADDRESS;
 
 
     // url to create new product
-    private static String url_create_user = "http://pluton.kt.agh.edu.pl/~wwrobel/new_user.php";
+    private static String url_create_patient = "http://pluton.kt.agh.edu.pl/~wwrobel/new_user.php";
 
     // JSON Node names
     private static final String TAG_SUCCESS = "success";
@@ -40,8 +43,11 @@ public class NewUserActivity extends Activity {
         setContentView(R.layout.add_user);
 
         // Edit Text
-        inputEid = (EditText) findViewById(R.id.inputEid);
-        inputTitle = (EditText) findViewById(R.id.inputTitle);
+        inputNAME = (EditText) findViewById(R.id.inputNAME);
+        inputSURNAME = (EditText) findViewById(R.id.inputSURNAME);
+        inputPESEL = (EditText) findViewById(R.id.inputPESEL);
+        inputPHONE = (EditText) findViewById(R.id.inputPHONE);
+        inputADDRESS = (EditText) findViewById(R.id.inputADDRESS);
 
 
         // Create button
@@ -53,7 +59,7 @@ public class NewUserActivity extends Activity {
             @Override
             public void onClick(View view) {
                 // creating new user in background thread
-                new CreateNewUser().execute();
+                new CreateNewPatient().execute();
             }
         });
     }
@@ -61,7 +67,7 @@ public class NewUserActivity extends Activity {
     /**
      * Background Async Task to Create new product
      * */
-    class CreateNewUser extends AsyncTask<String, String, String> {
+    class CreateNewPatient extends AsyncTask<String, String, String> {
 
         /**
          * Before starting background thread Show Progress Dialog
@@ -77,20 +83,27 @@ public class NewUserActivity extends Activity {
         }
 
         /**
-         * Creating user
+         * Creating Patient
          * */
         protected String doInBackground(String... args) {
-            String eid = inputEid.getText().toString();
-            String title = inputTitle.getText().toString();
+            String name = inputNAME.getText().toString();
+            String surname = inputSURNAME.getText().toString();
+            String pesel = inputPESEL.getText().toString();
+            String phone = inputPHONE.getText().toString();
+            String address = inputADDRESS.getText().toString();
 
             // Building Parameters
             List<NameValuePair> params = new ArrayList<NameValuePair>();
-            params.add(new BasicNameValuePair("eid", eid));
-            params.add(new BasicNameValuePair("title", title));
+            params.add(new BasicNameValuePair("name", name));
+            params.add(new BasicNameValuePair("surname", surname));
+            params.add(new BasicNameValuePair("pesel", pesel));
+            params.add(new BasicNameValuePair("phone", phone));
+            params.add(new BasicNameValuePair("address", address));
+
 
             // getting JSON Object
             // Note that create product url accepts POST method
-            JSONObject json = jsonParser.makeHttpRequest(url_create_user,
+            JSONObject json = jsonParser.makeHttpRequest(url_create_patient,
                     "POST", params);
 
             // check log cat for response

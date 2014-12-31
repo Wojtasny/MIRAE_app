@@ -7,8 +7,11 @@
     <string name="View_Users">Zobacz użytkowników</string>
     <string name="Add_User">Dodaj nowego użytkownika</string>
     <string name="title_activity_all_users">AllUsersActivity</string>
-    <string name="UserID">EID</string>
-    <string name="Title">Tytuł epizodu</string>
+    <string name="Name">Name</string>
+    <string name="Surname">Surname</string>
+    <string name="PESEL">PESEL</string>
+    <string name="Phone">Phone</string>
+    <string name="Address">Address</string>
     <string name="SaveChanges">Zapisz</string>
     <string name="Delete">Usuń</string>
     <string name="CreateNew">Dodaj do bazy</string>

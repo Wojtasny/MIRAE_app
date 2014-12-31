@@ -116,7 +116,7 @@ public class AllUsersActivity extends ListActivity {
             pDialog = new ProgressDialog(AllUsersActivity.this);
             pDialog.setMessage(getString(R.string.ProgressDialogLoadingUsers));
             pDialog.setIndeterminate(false);
-            pDialog.setCancelable(true);
+            pDialog.setCancelable(false);
             pDialog.show();
         }
 

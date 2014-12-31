@@ -7,7 +7,7 @@
     <!-- eid Label -->
     <TextView android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/UserID"
+        android:text="@string/Name"
         android:textColor="@color/pomaranczowy"
         android:paddingLeft="10dip"
         android:paddingRight="10dip"
@@ -28,7 +28,7 @@
     <!-- Title Label -->
     <TextView android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/Title"
+        android:text="@string/Surname"
         android:paddingLeft="10dip"
         android:paddingRight="10dip"
         android:paddingTop="10dip"
