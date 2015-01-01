@@ -4,7 +4,7 @@
     android:background="@drawable/bg_gradient"
     android:layout_height="match_parent">
 
-    <!-- eid Label -->
+    <!-- name Label -->
     <TextView android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/Name"
@@ -14,18 +14,18 @@
         android:paddingTop="10dip"
         android:textSize="25dip"/>
 
-    <!-- Input title -->
-    <EditText android:id="@+id/EditEid"
+    <!-- Edit name -->
+    <EditText android:id="@+id/editNAME"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/white"
         android:layout_margin="5dip"
         android:layout_marginBottom="15dip"
         android:singleLine="true"
+        android:textColor="@color/white"
         android:textSize="25dip"
-        android:inputType="numberDecimal"/>
+        android:inputType="textPersonName"/>
 
-    <!-- Title Label -->
+    <!-- Surname Label -->
     <TextView android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/Surname"
@@ -35,34 +35,100 @@
         android:textColor="@color/pomaranczowy"
         android:textSize="25dip"/>
 
-    <!-- Input Title -->
-    <EditText android:id="@+id/EditTitle"
+    <!-- edit Surname -->
+    <EditText android:id="@+id/editSURNAME"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dip"
-        android:textColor="@color/white"
         android:layout_marginBottom="15dip"
+        android:textColor="@color/white"
+        android:textSize="25dip"
+        android:singleLine="true"
+        android:inputType="textPersonName"/>
+
+    <!-- PESEL Label -->
+    <TextView android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/PESEL"
+        android:textColor="@color/pomaranczowy"
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip"
+        android:paddingTop="10dip"
+        android:textSize="25dip"/>
+
+    <!-- edit PESEL -->
+    <EditText android:id="@+id/editPESEL"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dip"
+        android:layout_marginBottom="15dip"
+        android:singleLine="true"
+        android:textColor="@color/white"
+        android:textSize="25dip"
+        android:inputType="numberDecimal"/>
+
+    <!-- Phone Label -->
+    <TextView android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/Phone"
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip"
+        android:paddingTop="10dip"
+        android:textColor="@color/pomaranczowy"
+        android:textSize="25dip"/>
+
+    <!-- edit Phone -->
+    <EditText android:id="@+id/editPHONE"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dip"
+        android:layout_marginBottom="15dip"
+        android:textColor="@color/white"
+        android:textSize="25dip"
+        android:singleLine="true"
+        android:inputType="phone"/>
+
+    <!-- Address Label -->
+    <TextView android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/Address"
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip"
+        android:paddingTop="10dip"
+        android:textColor="@color/pomaranczowy"
+        android:textSize="25dip"/>
+
+    <!-- Input Address -->
+    <EditText android:id="@+id/editADDRESS"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dip"
+        android:layout_marginBottom="15dip"
+        android:textColor="@color/white"
         android:textSize="25dip"
         android:singleLine="true"/>
 
     <LinearLayout android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:weightSum="1.0">
         <!-- Button Create User -->
         <Button android:id="@+id/btnSave"
-            android:layout_width="193dp"
-            android:layout_height="100dp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight=".5"
             android:textColor="@color/white"
             android:textSize="25dip"
             android:text="@string/SaveChanges" />
 
         <!-- Button Delete Product -->
         <Button android:id="@+id/btnDelete"
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
+            android:layout_weight=".5"
             android:layout_height="match_parent"
             android:textColor="@color/white"
             android:textSize="25dip"
             android:text="@string/Delete" />
     </LinearLayout>
 
-</LinearLayout>
+    </LinearLayout>

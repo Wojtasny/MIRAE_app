@@ -22,13 +22,15 @@ import android.widget.EditText;
 
 public class EditUserActivity extends Activity {
 
-    EditText txtEid;
-    EditText txtTitle;
-    EditText txtCreatedAt;
+    EditText editNAME;
+    EditText editSURNAME;
+    EditText editPESEL;
+    EditText editPHONE;
+    EditText editADDRESS;
     Button btnSave;
     Button btnDelete;
 
-    String eid;
+    String pesel;
 
     // Progress Dialog
     private ProgressDialog pDialog;
@@ -47,9 +49,12 @@ public class EditUserActivity extends Activity {
 
     // JSON Node names
     private static final String TAG_SUCCESS = "success";
-    private static final String TAG_USER = "users";
-    private static final String TAG_EID = "eid";
-    private static final String TAG_TITLE = "title";
+    private static final String TAG_PATIENT = "patient";
+    private static final String TAG_NAME = "name";
+    private static final String TAG_SURNAME = "surname";
+    private static final String TAG_PESEL = "pesel";
+    private static final String TAG_PHONE = "phone";
+    private static final String TAG_ADDRESS = "address";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -59,13 +64,13 @@ public class EditUserActivity extends Activity {
 
 
            // uwaga uwaga wklejam jakis kod
-
+/*
         if (android.os.Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
         }
-
-            //az do tad mam usunąc go
+*/
+            //az do tad mam usunąc go chyba ze dziala :)
 
 
         // save button
@@ -76,7 +81,7 @@ public class EditUserActivity extends Activity {
         Intent i = getIntent();
 
         // getting product id (pid) from intent
-        eid = i.getStringExtra(TAG_EID);
+        pesel = i.getStringExtra(TAG_PESEL);
 
         // Getting complete product details in background thread
         new GetUserDetails().execute();
@@ -117,7 +122,7 @@ public class EditUserActivity extends Activity {
             pDialog = new ProgressDialog(EditUserActivity.this);
             pDialog.setMessage(getString(R.string.ProgressDialogEdit));
             pDialog.setIndeterminate(false);
-            pDialog.setCancelable(true);
+            pDialog.setCancelable(false);
             pDialog.show();
         }
 
@@ -134,7 +139,7 @@ public class EditUserActivity extends Activity {
                     try {
                         // Building Parameters
                         List<NameValuePair> params = new ArrayList<NameValuePair>();
-                        params.add(new BasicNameValuePair("eid", eid));
+                        params.add(new BasicNameValuePair("pesel", pesel));
 
                         // getting user details by making HTTP request
                         // Note that user details url will use GET request
@@ -148,19 +153,25 @@ public class EditUserActivity extends Activity {
                         success = json.getInt(TAG_SUCCESS);
                         if (success == 1) {
                             // successfully received product details
-                            JSONArray productObj = json.getJSONArray(TAG_USER); // JSON Array
+                            JSONArray productObj = json.getJSONArray(TAG_PATIENT); // JSON Array
 
                             // get first user object from JSON Array
                             JSONObject product = productObj.getJSONObject(0);
 
                             // user with this eid found
                             // Edit Text
-                            txtEid = (EditText) findViewById(R.id.EditEid);
-                            txtTitle = (EditText) findViewById(R.id.EditTitle);
+                            editNAME = (EditText) findViewById(R.id.editNAME);
+                            editSURNAME = (EditText) findViewById(R.id.editSURNAME);
+                            editPESEL = (EditText) findViewById(R.id.editPESEL);
+                            editPHONE = (EditText) findViewById(R.id.editPHONE);
+                            editADDRESS = (EditText) findViewById(R.id.editADDRESS);
 
                             // display user data in EditText
-                            txtEid.setText(product.getString(TAG_EID));
-                            txtTitle.setText(product.getString(TAG_TITLE));
+                            editNAME.setText(product.getString(TAG_NAME));
+                            editSURNAME.setText(product.getString(TAG_SURNAME));
+                            editPESEL.setText(product.getString(TAG_PESEL));
+                            editPHONE.setText(product.getString(TAG_PHONE));
+                            editADDRESS.setText(product.getString(TAG_ADDRESS));
 
 
                         }else{
@@ -198,7 +209,7 @@ public class EditUserActivity extends Activity {
             pDialog = new ProgressDialog(EditUserActivity.this);
             pDialog.setMessage(getString(R.string.ProgressDialogSaveUser));
             pDialog.setIndeterminate(false);
-            pDialog.setCancelable(true);
+            pDialog.setCancelable(false);
             pDialog.show();
         }
 
@@ -208,13 +219,19 @@ public class EditUserActivity extends Activity {
         protected String doInBackground(String... args) {
 
             // getting updated data from EditTexts
-            String eid = txtEid.getText().toString();
-            String title = txtTitle.getText().toString();
+            String name = editNAME.getText().toString();
+            String surname = editSURNAME.getText().toString();
+            String pesel = editPESEL.getText().toString();
+            String phone = editPHONE.getText().toString();
+            String address = editADDRESS.getText().toString();
 
             // Building Parameters
             List<NameValuePair> params = new ArrayList<NameValuePair>();
-            params.add(new BasicNameValuePair(TAG_EID, eid));
-            params.add(new BasicNameValuePair(TAG_TITLE, title));
+            params.add(new BasicNameValuePair(TAG_NAME, name));
+            params.add(new BasicNameValuePair(TAG_SURNAME, surname));
+            params.add(new BasicNameValuePair(TAG_PESEL, pesel));
+            params.add(new BasicNameValuePair(TAG_PHONE, phone));
+            params.add(new BasicNameValuePair(TAG_ADDRESS, address));
 
             // sending modified data through http request
             // Notice that update product url accepts POST method
@@ -264,7 +281,7 @@ public class EditUserActivity extends Activity {
             pDialog = new ProgressDialog(EditUserActivity.this);
             pDialog.setMessage(getString(R.string.ProgressDialogDeletingUser));
             pDialog.setIndeterminate(false);
-            pDialog.setCancelable(true);
+            pDialog.setCancelable(false);
             pDialog.show();
         }
 
@@ -278,7 +295,7 @@ public class EditUserActivity extends Activity {
             try {
                 // Building Parameters
                 List<NameValuePair> params = new ArrayList<NameValuePair>();
-                params.add(new BasicNameValuePair("eid", eid));
+                params.add(new BasicNameValuePair("pesel", pesel));
 
                 // getting user details by making HTTP request
                 JSONObject json = jsonParser.makeHttpRequest(

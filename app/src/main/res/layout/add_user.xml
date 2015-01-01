@@ -99,7 +99,7 @@
         android:textColor="@color/pomaranczowy"
         android:textSize="25dip"/>
 
-    <!-- Input Phone -->
+    <!-- Input Address -->
     <EditText android:id="@+id/inputADDRESS"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"

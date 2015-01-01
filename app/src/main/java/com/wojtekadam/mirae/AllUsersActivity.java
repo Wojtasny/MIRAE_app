@@ -76,7 +76,7 @@ public class AllUsersActivity extends ListActivity {
                 // Starting new intent
                 Intent in = new Intent(getApplicationContext(),
                         EditUserActivity.class);
-                // sending pid to next activity
+                // sending pesel to next activity
                 in.putExtra(TAG_PESEL, PESEL);
 
                 // starting new activity and expecting some response back
@@ -129,7 +129,7 @@ public class AllUsersActivity extends ListActivity {
             // getting JSON string from URL
             JSONObject json = jParser.makeHttpRequest(url_all_patients, "GET", params);
 
-            // Check your log cat for JSON reponse
+            // Check your log cat for JSON response
             Log.d("All Patients: ", json.toString());
 
             try {
@@ -187,6 +187,7 @@ public class AllUsersActivity extends ListActivity {
         protected void onPostExecute(String file_url) {
             // dismiss the dialog after getting all products
             pDialog.dismiss();
+
             // updating UI from Background Thread
             runOnUiThread(new Runnable() {
                 public void run() {
