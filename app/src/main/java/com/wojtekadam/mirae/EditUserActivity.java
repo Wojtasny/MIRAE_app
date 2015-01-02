@@ -1,6 +1,7 @@
 package com.wojtekadam.mirae;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.http.NameValuePair;
@@ -14,11 +15,12 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.StrictMode;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+
 
 public class EditUserActivity extends Activity {
 
@@ -32,11 +34,14 @@ public class EditUserActivity extends Activity {
 
     String pesel;
 
+
     // Progress Dialog
     private ProgressDialog pDialog;
 
     // JSON parser class
     JSONParser jsonParser = new JSONParser();
+
+    ArrayList<HashMap<String, String>> patientList;
 
     // single product url
     private static final String url_user_details = "http://pluton.kt.agh.edu.pl/~wwrobel/get_user_details.php";
@@ -61,18 +66,6 @@ public class EditUserActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.edit_user);
 
-
-
-           // uwaga uwaga wklejam jakis kod
-/*
-        if (android.os.Build.VERSION.SDK_INT > 9) {
-            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-            StrictMode.setThreadPolicy(policy);
-        }
-*/
-            //az do tad mam usunąc go chyba ze dziala :)
-
-
         // save button
         btnSave = (Button) findViewById(R.id.btnSave);
         btnDelete = (Button) findViewById(R.id.btnDelete);
@@ -85,6 +78,7 @@ public class EditUserActivity extends Activity {
 
         // Getting complete product details in background thread
         new GetUserDetails().execute();
+
 
         // save button click event
         btnSave.setOnClickListener(new View.OnClickListener() {
@@ -108,10 +102,18 @@ public class EditUserActivity extends Activity {
 
     }
 
+
+
     /**
      * Background Async Task to Get complete user details
      * */
     class GetUserDetails extends AsyncTask<String, String, String> {
+
+        String name;
+        String surname;
+
+        String phone;
+        String address;
 
         /**
          * Before starting background thread Show Progress Dialog
@@ -131,67 +133,62 @@ public class EditUserActivity extends Activity {
          * */
         protected String doInBackground(String... params) {
 
-            // updating UI from Background Thread
-            runOnUiThread(new Runnable() {
-                public void run() {
-                    // Check for success tag
-                    int success;
-                    try {
-                        // Building Parameters
-                        List<NameValuePair> params = new ArrayList<NameValuePair>();
-                        params.add(new BasicNameValuePair("pesel", pesel));
 
-                        // getting user details by making HTTP request
-                        // Note that user details url will use GET request
-                        JSONObject json = jsonParser.makeHttpRequest(
-                                url_user_details, "GET", params);
+            List<NameValuePair> param = new ArrayList<NameValuePair>();
+            param.add(new BasicNameValuePair("pesel", pesel));
 
-                        // check your log for json response
-                        Log.d("Single Product Details", json.toString());
+            // getting user details by making HTTP request
+            // Note that user details url will use GET request
+            JSONObject json = jsonParser.makeHttpRequest(
+                    url_user_details, "GET", param);
+            //check your log for json response
+            Log.d("Single Product Details", json.toString());
 
-                        // json success tag
-                        success = json.getInt(TAG_SUCCESS);
-                        if (success == 1) {
-                            // successfully received product details
-                            JSONArray productObj = json.getJSONArray(TAG_PATIENT); // JSON Array
+            try{
+                int success = json.getInt(TAG_SUCCESS);
+                if (success == 1) {
+                    // successfully received product details
+                    JSONArray patientOBJ = json.getJSONArray(TAG_PATIENT); // JSON Array
+                    // get first user object from JSON Array
+                    JSONObject patient = patientOBJ.getJSONObject(0);
+                    name = patient.getString(TAG_NAME);
+                    surname = patient.getString(TAG_SURNAME);
+                    pesel = patient.getString(TAG_PESEL);
+                    phone = patient.getString(TAG_PHONE);
+                    address = patient.getString(TAG_ADDRESS);
 
-                            // get first user object from JSON Array
-                            JSONObject product = productObj.getJSONObject(0);
-
-                            // user with this eid found
-                            // Edit Text
-                            editNAME = (EditText) findViewById(R.id.editNAME);
-                            editSURNAME = (EditText) findViewById(R.id.editSURNAME);
-                            editPESEL = (EditText) findViewById(R.id.editPESEL);
-                            editPHONE = (EditText) findViewById(R.id.editPHONE);
-                            editADDRESS = (EditText) findViewById(R.id.editADDRESS);
-
-                            // display user data in EditText
-                            editNAME.setText(product.getString(TAG_NAME));
-                            editSURNAME.setText(product.getString(TAG_SURNAME));
-                            editPESEL.setText(product.getString(TAG_PESEL));
-                            editPHONE.setText(product.getString(TAG_PHONE));
-                            editADDRESS.setText(product.getString(TAG_ADDRESS));
-
-
-                        }else{
-                            // user with eid not found
-                        }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
                 }
-            });
+            }
+            catch(JSONException e){
+                //wyjatek
+            }
 
             return null;
         }
-
-        /**
-         * After completing background task Dismiss the progress dialog
-         * **/
         protected void onPostExecute(String file_url) {
             // dismiss the dialog once got all details
             pDialog.dismiss();
+
+
+            runOnUiThread(new Runnable() {
+                public void run() {
+                    // Edit Text
+                        editNAME = (EditText) findViewById(R.id.editNAME);
+                        editSURNAME = (EditText) findViewById(R.id.editSURNAME);
+                        editPESEL = (EditText) findViewById(R.id.editPESEL);
+                        editPHONE = (EditText) findViewById(R.id.editPHONE);
+                        editADDRESS = (EditText) findViewById(R.id.editADDRESS);
+
+                        // display user data in EditText
+                        editNAME.setText(name);
+                        editSURNAME.setText(surname);
+                        editPESEL.setText(pesel);
+                        editPHONE.setText(phone);
+                        editADDRESS.setText(address);
+
+                }
+            });
+
         }
     }
 
