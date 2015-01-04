@@ -73,6 +73,7 @@ public class UserOptionActivity extends Activity {
             @Override
         public void onClick(View view) {
                 Intent i = new Intent(getApplicationContext(), PickADateActivity.class);
+                i.putExtra("pesel", pesel);
                 startActivity(i);
 
             }

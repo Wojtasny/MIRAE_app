@@ -17,7 +17,12 @@
     <string name="CreateNew">Dodaj do bazy</string>
     <string name="Edit_User">Edytuj użytkownika</string>
     <string name="PickADate">Wybierz datę</string>
+    <string name="Reserve">Rezerwuj</string>
+    <string name="DajPESEL">Proszę podać PESEL</string>
+    <string name="btnContinue">Dalej</string>
     <string name="ProgressDialogEdit">Ładowanie danych. Proszę czekać...</string>
+    <string name="ProgressDialogPickADate">Zapisywanie daty</string>
+    <string name="ProgressDialogMainScreen">Wyszukiwanie użytkownika o podanym nr PESEL</string>
     <string name="ProgressDialogSaveUser">Zapisywanie danych użytkownika...</string>
     <string name="ProgressDialogDeletingUser">Usuwanie wpisu...</string>
     <string name="PorgressDialogCreatingUser">Tworzenie wpisu...</string>

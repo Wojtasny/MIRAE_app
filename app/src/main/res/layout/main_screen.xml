@@ -9,25 +9,39 @@
 
     <!--  Sample Dashboard screen with Two buttons -->
     <!--  Button to view all users screen -->
-    <Button android:id="@+id/btnViewUsers"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        android:textSize="25dip"
-        android:text="@string/View_Users"
-        android:layout_marginTop="25dip"
-        android:layout_weight="0.14" />
+
 
     <!--  Button to create a new product screen -->
-    <Button android:id="@+id/btnAddUser"
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/DajPESEL"
+        android:textColor="@color/pomaranczowy"
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip"
+        android:paddingTop="100dip"
+        android:textSize="30dip"
+        />
+
+    <EditText android:id="@+id/inputPESEL"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dip"
+        android:layout_marginBottom="15dip"
+        android:singleLine="true"
+        android:textColor="@color/white"
+        android:textSize="30dip"
+        android:inputType="numberDecimal"/>
+
+    <Button android:id="@+id/btnContinue"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/white"
         android:textSize="25dip"
-        android:text="@string/Add_User"
-        android:layout_marginTop="25dip"
+        android:text="@string/btnContinue"
+        android:layout_marginTop="100dip"
         android:layout_weight="0.14" />
-
 
 
 </LinearLayout>

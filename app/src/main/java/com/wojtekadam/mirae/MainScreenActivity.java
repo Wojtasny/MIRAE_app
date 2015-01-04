@@ -1,57 +1,97 @@
 package com.wojtekadam.mirae;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class MainScreenActivity extends Activity {
 
-    Button btnViewUsers;
-    Button btnAddUser;
-//    Button btnKalendarz;
+    Button btnContinue;
+    String pesel;
+    EditText inputPESEL;
+    ProgressDialog pDialog;
+
+    JSONParser jsonParser = new JSONParser();
+
+    private static final String url_user_details = "http://pluton.kt.agh.edu.pl/~wwrobel/get_user_details.php";
+
+    private static final String TAG_SUCCESS = "success";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_screen);
 
+        inputPESEL = (EditText) findViewById(R.id.inputPESEL);
         // Buttons
-        btnViewUsers =  (Button) findViewById(R.id.btnViewUsers);
-        btnAddUser = (Button) findViewById(R.id.btnAddUser);
-//        btnKalendarz = (Button) findViewById(R.id.Kalendarz);
+        btnContinue =  (Button) findViewById(R.id.btnContinue);
 
         // view users click event
-        btnViewUsers.setOnClickListener(new View.OnClickListener(){
+        btnContinue.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                // Launching All users Activity
-                Intent i = new Intent(getApplicationContext(), AllUsersActivity.class);
-                startActivity(i);
+                pesel = inputPESEL.getText().toString();
+                new GetUserDetails().execute();
             }
         });
+    }
+    class GetUserDetails extends AsyncTask<String, String, String> {
 
-        //view users click event
-        btnAddUser.setOnClickListener(new View.OnClickListener(){
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pDialog = new ProgressDialog(MainScreenActivity.this);
+            pDialog.setMessage(getString(R.string.ProgressDialogMainScreen));
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(false);
+            pDialog.show();
+        }
+            protected String doInBackground(String... params) {
 
-            @Override
-            public void onClick(View view) {
-                // Launching add new user activity
-                Intent i = new Intent(getApplicationContext(), NewUserActivity.class);
-                startActivity(i);
+            List<NameValuePair> param = new ArrayList<NameValuePair>();
+            param.add(new BasicNameValuePair("pesel", pesel));
+
+            JSONObject json = jsonParser.makeHttpRequest(
+                    url_user_details, "GET", param);
+            //check log for json response
+            Log.d("Single User Details", json.toString());
+
+            try{
+                int success = json.getInt(TAG_SUCCESS);
+                if (success == 1) {
+                    Intent i = new Intent(getApplicationContext(), UserOptionActivity.class);
+                    i.putExtra("pesel", pesel);
+                    startActivity(i);
+                }
+                else{
+                    Intent i = new Intent(getApplicationContext(), NewUserActivity.class);
+                    startActivity(i);
+                }
             }
-        });
-//        btnKalendarz.setOnClickListener(new View.OnClickListener() {
-//
-//            @Override
-//        public void onClick(View view){
-//                Intent i = new Intent(getApplicationContext(), PickADateActivity.class);
-//                startActivity(i);
-//            }
-//        });
+            catch(JSONException e){
+                //wyjatek
+            }
 
-
+            return null;
+        }
+        protected void onPostExecute(String file_url) {
+            // dismiss the dialog once got all details
+            pDialog.dismiss();
+        }
     }
 }
