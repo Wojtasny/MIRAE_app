@@ -75,7 +75,7 @@ public class AllUsersActivity extends ListActivity {
 
                 // Starting new intent
                 Intent in = new Intent(getApplicationContext(),
-                        EditUserActivity.class);
+                        UserOptionActivity.class);
                 // sending pesel to next activity
                 in.putExtra(TAG_PESEL, PESEL);
 

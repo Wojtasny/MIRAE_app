@@ -38,6 +38,18 @@
             android:label="Edit User" >
         </activity>
 
+        <!-- Kalendarz -->
+        <activity
+            android:name=".PickADateActivity"
+            android:label="Kalendarz">
+        </activity>
+
+        <!-- Wybór po wybraniu użytkownika -->
+        <activity
+            android:name=".UserOptionActivity"
+            android:label="Opcje">
+            </activity>
+
     </application>
 
     <!--  Internet Permissions -->

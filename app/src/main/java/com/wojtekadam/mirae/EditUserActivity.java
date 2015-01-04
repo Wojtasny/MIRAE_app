@@ -186,6 +186,7 @@ public class EditUserActivity extends Activity {
                         editPHONE.setText(phone);
                         editADDRESS.setText(address);
 
+
                 }
             });
 
@@ -241,9 +242,15 @@ public class EditUserActivity extends Activity {
 
                 if (success == 1) {
                     // successfully updated
-                    Intent i = getIntent();
+                    Intent returnIntent = new Intent();
                     // send result code 100 to notify about product update
-                    setResult(100, i);
+                    returnIntent.putExtra(TAG_NAME, name);
+                    returnIntent.putExtra(TAG_SURNAME, surname);
+                    returnIntent.putExtra(TAG_PESEL, pesel);
+                    returnIntent.putExtra(TAG_PHONE, phone);
+                    returnIntent.putExtra(TAG_ADDRESS, address);
+                    setResult(RESULT_OK, returnIntent);
+
                     finish();
                 } else {
                     // failed to update product

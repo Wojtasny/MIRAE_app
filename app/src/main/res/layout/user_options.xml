@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_gradient"
+    android:gravity="center_horizontal"
+    android:weightSum="1">
+    <Button android:id="@+id/btnPickADate"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="25dip"
+        android:text="@string/PickADate"
+        android:layout_marginTop="25dip"
+        android:layout_weight="0.14" />
+
+    <Button android:id="@+id/btnEditUser"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="25dip"
+        android:text="@string/Edit_User"
+        android:layout_marginTop="25dip"
+        android:layout_weight="0.14" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="50dip">
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:paddingTop="6dip"
+            android:paddingLeft="6dip"
+            android:textSize="17dip"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/surname"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:paddingTop="6dip"
+            android:paddingLeft="6dip"
+            android:textSize="17dip"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/pesel"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:paddingTop="6dip"
+            android:paddingLeft="6dip"
+            android:textSize="17dip"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/phone"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:paddingTop="6dip"
+            android:paddingLeft="6dip"
+            android:textSize="17dip"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/address"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:paddingTop="6dip"
+            android:paddingLeft="6dip"
+            android:textSize="17dip"
+            android:textStyle="bold" />
+
+        </LinearLayout>
+
+</LinearLayout>
