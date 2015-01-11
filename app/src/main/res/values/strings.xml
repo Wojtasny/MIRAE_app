@@ -20,6 +20,11 @@
     <string name="Reserve">Rezerwuj</string>
     <string name="DajPESEL">Proszę podać PESEL</string>
     <string name="btnContinue">Dalej</string>
+    <string name="Enter">Rejestrowanie wizyty</string>
+    <string name="Symptomy">Symptomy i inne uwagi do lekarza</string>
+    <string name="txtInputQuestion">Proszę podać symptomy oraz inne uwagi do lekarza</string>
+    <string name="speech_not_supprted">Przepraszamy! Twoje urządzenie nie wspiera wprowadzania tekstu za pomocą mowy :(</string>
+    <string name="tap_on_mic">Naciśnij na mikrofon by rozpocząć</string>
     <string name="ProgressDialogEdit">Ładowanie danych. Proszę czekać...</string>
     <string name="ProgressDialogPickADate">Zapisywanie daty</string>
     <string name="ProgressDialogMainScreen">Wyszukiwanie użytkownika o podanym nr PESEL</string>

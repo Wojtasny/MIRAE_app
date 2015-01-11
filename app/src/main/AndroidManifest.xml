@@ -48,7 +48,13 @@
         <activity
             android:name=".UserOptionActivity"
             android:label="Opcje">
-            </activity>
+        </activity>
+
+        <!-- Podawanie symptomów -->
+        <activity
+            android:name=".SymptomsActivity"
+            android:label="@string/Symptomy">
+        </activity>
 
     </application>
 

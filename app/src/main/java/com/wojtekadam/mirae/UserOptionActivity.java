@@ -72,7 +72,7 @@ public class UserOptionActivity extends Activity {
         btnPickADate.setOnClickListener(new View.OnClickListener(){
             @Override
         public void onClick(View view) {
-                Intent i = new Intent(getApplicationContext(), PickADateActivity.class);
+                Intent i = new Intent(getApplicationContext(), SymptomsActivity.class);
                 i.putExtra("pesel", pesel);
                 startActivity(i);
 
