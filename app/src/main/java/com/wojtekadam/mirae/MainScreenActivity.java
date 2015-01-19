@@ -28,10 +28,6 @@ public class MainScreenActivity extends Activity {
 
     JSONParser jsonParser = new JSONParser();
 
-    private static final String url_user_details = "http://pluton.kt.agh.edu.pl/~wwrobel/get_user_details.php";
-
-    private static final String TAG_SUCCESS = "success";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,23 +60,24 @@ public class MainScreenActivity extends Activity {
             protected String doInBackground(String... params) {
 
             List<NameValuePair> param = new ArrayList<NameValuePair>();
-            param.add(new BasicNameValuePair("pesel", pesel));
+            param.add(new BasicNameValuePair(getString(R.string.TAG_PESEL), pesel));
 
-            JSONObject json = jsonParser.makeHttpRequest(
-                    url_user_details, "GET", param);
+            JSONObject json = jsonParser.makeHttpRequest("http://pluton.kt.agh.edu.pl/~aniedzialkowski/mirae_php_scripts/get_user_details.php", "GET", param);
             //check log for json response
             Log.d("Single User Details", json.toString());
 
             try{
-                int success = json.getInt(TAG_SUCCESS);
+                int success = json.getInt(getString(R.string.TAG_SUCCESS));
                 if (success == 1) {
                     Intent i = new Intent(getApplicationContext(), UserOptionActivity.class);
-                    i.putExtra("pesel", pesel);
+                    i.putExtra(getString(R.string.TAG_PESEL), pesel);
                     startActivity(i);
+                    Log.d("Calling user option","");
                 }
                 else{
                     Intent i = new Intent(getApplicationContext(), NewUserActivity.class);
                     startActivity(i);
+                    Log.d("Calling new user","");
                 }
             }
             catch(JSONException e){

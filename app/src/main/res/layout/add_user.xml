@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:background="@drawable/bg_gradient"
     android:layout_height="match_parent"
     android:weightSum="1">
-
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btnCreateUser">
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
     <!-- name Label -->
     <TextView android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -13,7 +20,7 @@
         android:paddingLeft="10dip"
         android:paddingRight="10dip"
         android:paddingTop="10dip"
-        android:textSize="25dip"/>
+        android:textSize="25sp"/>
 
     <!-- Input name -->
     <EditText android:id="@+id/inputNAME"
@@ -23,7 +30,8 @@
         android:layout_marginBottom="15dip"
         android:singleLine="true"
         android:textColor="@color/white"
-        android:textSize="25dip"
+        android:hint="@string/name_hint"
+        android:textSize="25sp"
         android:inputType="textPersonName"/>
 
     <!-- Surname Label -->
@@ -34,7 +42,7 @@
         android:paddingRight="10dip"
         android:paddingTop="10dip"
         android:textColor="@color/pomaranczowy"
-        android:textSize="25dip"/>
+        android:textSize="25sp"/>
 
     <!-- Input Surname -->
     <EditText android:id="@+id/inputSURNAME"
@@ -42,8 +50,9 @@
         android:layout_height="wrap_content"
         android:layout_margin="5dip"
         android:layout_marginBottom="15dip"
+        android:hint="@string/surname_hint"
         android:textColor="@color/white"
-        android:textSize="25dip"
+        android:textSize="25sp"
         android:singleLine="true"
         android:inputType="textPersonName"/>
 
@@ -55,7 +64,7 @@
         android:paddingLeft="10dip"
         android:paddingRight="10dip"
         android:paddingTop="10dip"
-        android:textSize="25dip"/>
+        android:textSize="25sp"/>
 
     <!-- Input PESEL -->
     <EditText android:id="@+id/inputPESEL"
@@ -63,9 +72,10 @@
         android:layout_height="wrap_content"
         android:layout_margin="5dip"
         android:layout_marginBottom="15dip"
+        android:hint="@string/pesel_hint"
         android:singleLine="true"
         android:textColor="@color/white"
-        android:textSize="25dip"
+        android:textSize="25sp"
         android:inputType="numberDecimal"/>
 
     <!-- Phone Label -->
@@ -76,16 +86,17 @@
         android:paddingRight="10dip"
         android:paddingTop="10dip"
         android:textColor="@color/pomaranczowy"
-        android:textSize="25dip"/>
+        android:textSize="25sp"/>
 
     <!-- Input Phone -->
     <EditText android:id="@+id/inputPHONE"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dip"
+        android:hint="@string/phone_hint"
         android:layout_marginBottom="15dip"
         android:textColor="@color/white"
-        android:textSize="25dip"
+        android:textSize="25sp"
         android:singleLine="true"
         android:inputType="phone"/>
 
@@ -97,7 +108,7 @@
         android:paddingRight="10dip"
         android:paddingTop="10dip"
         android:textColor="@color/pomaranczowy"
-        android:textSize="25dip"/>
+        android:textSize="25sp"/>
 
     <!-- Input Address -->
     <EditText android:id="@+id/inputADDRESS"
@@ -105,17 +116,44 @@
         android:layout_height="wrap_content"
         android:layout_margin="5dip"
         android:layout_marginBottom="15dip"
+        android:hint="@string/address_hint"
+        android:inputType="textPostalAddress"
         android:textColor="@color/white"
-        android:textSize="25dip"
+        android:textSize="25sp"
+        android:singleLine="true"/>
+    <!-- EMAIL Label -->
+    <TextView android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/Email"
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip"
+        android:paddingTop="10dip"
+        android:textColor="@color/pomaranczowy"
+        android:textSize="25sp"/>
+
+    <!-- Input Email -->
+    <EditText android:id="@+id/inputEMAIL"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dip"
+        android:layout_marginBottom="15dip"
+        android:hint="@string/email_hint"
+        android:inputType="textEmailAddress"
+        android:textColor="@color/white"
+        android:textSize="25sp"
         android:singleLine="true"/>
 
+
+    </LinearLayout>
+    </ScrollView>
     <!-- Button Create Product -->
     <Button android:id="@+id/btnCreateUser"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dip"
         android:textColor="@color/white"
-        android:textSize="25dip"
+        android:layout_alignParentBottom="true"
+        android:textSize="25sp"
         android:text="@string/CreateNew"
         android:layout_weight="0.15" />
-</LinearLayout>
+</RelativeLayout>

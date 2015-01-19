@@ -34,7 +34,7 @@ public class AllUsersActivity extends ListActivity {
     ArrayList<HashMap<String, String>> patientsList;
 
     // url to get all products list
-    private static String url_all_patients = "http://pluton.kt.agh.edu.pl/~wwrobel/get_all_users.php";
+    private static String url_all_patients = "http://pluton.kt.agh.edu.pl/~aniedzialkowski/mirae_php_scripts/get_all_users.php";
 
     // JSON Node names
     private static final String TAG_SUCCESS = "success";

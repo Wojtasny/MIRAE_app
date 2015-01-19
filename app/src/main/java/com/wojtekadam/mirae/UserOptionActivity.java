@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserOptionActivity extends Activity {
-    private static final String url_user_details = "http://pluton.kt.agh.edu.pl/~wwrobel/get_user_details.php";
+
     JSONParser jsonParser = new JSONParser();
     Button btnEditUser;
     Button btnPickADate;
@@ -30,15 +30,7 @@ public class UserOptionActivity extends Activity {
     TextView PESEL;
     TextView PHONE;
     TextView ADDRESS;
-
-    // JSON Node names
-    private static final String TAG_SUCCESS = "success";
-    private static final String TAG_PATIENT = "patient";
-    private static final String TAG_NAME = "name";
-    private static final String TAG_SURNAME = "surname";
-    private static final String TAG_PESEL = "pesel";
-    private static final String TAG_PHONE = "phone";
-    private static final String TAG_ADDRESS = "address";
+    TextView EMAIL;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -64,7 +56,7 @@ public class UserOptionActivity extends Activity {
                 in.putExtra("pesel", pesel);
 
                 // starting new activity and expecting some response back
-                startActivityForResult(in, 0);
+                startActivityForResult(in, 100);
 
             }
         });
@@ -85,10 +77,9 @@ public class UserOptionActivity extends Activity {
 
         String name;
         String surname;
-
         String phone;
         String address;
-
+        String email;
 
         /**
          * Getting patient details in background thread
@@ -100,23 +91,23 @@ public class UserOptionActivity extends Activity {
 
             // getting user details by making HTTP request
             // Note that user details url will use GET request
-            JSONObject json = jsonParser.makeHttpRequest(
-                    url_user_details, "GET", param);
+            JSONObject json = jsonParser.makeHttpRequest(getString(R.string.url_user_details), "GET", param);
             //check your log for json response
             Log.d("Single Product Details", json.toString());
 
             try{
-                int success = json.getInt(TAG_SUCCESS);
+                int success = json.getInt(getString(R.string.TAG_SUCCESS));
                 if (success == 1) {
                     // successfully received product details
-                    JSONArray patientOBJ = json.getJSONArray(TAG_PATIENT); // JSON Array
+                    JSONArray patientOBJ = json.getJSONArray(getString(R.string.TAG_PATIENT)); // JSON Array
                     // get first user object from JSON Array
                     JSONObject patient = patientOBJ.getJSONObject(0);
-                    name = patient.getString(TAG_NAME);
-                    surname = patient.getString(TAG_SURNAME);
-                    pesel = patient.getString(TAG_PESEL);
-                    phone = patient.getString(TAG_PHONE);
-                    address = patient.getString(TAG_ADDRESS);
+                    name = patient.getString(getString(R.string.TAG_NAME));
+                    surname = patient.getString(getString(R.string.TAG_SURNAME));
+                    pesel = patient.getString(getString(R.string.TAG_PESEL));
+                    phone = patient.getString(getString(R.string.TAG_PHONE));
+                    address = patient.getString(getString(R.string.TAG_ADDRESS));
+                    email = patient.getString(getString(R.string.TAG_EMAIL));
 
                 }
             }
@@ -136,6 +127,7 @@ public class UserOptionActivity extends Activity {
                     PESEL = (TextView) findViewById(R.id.pesel);
                     PHONE = (TextView) findViewById(R.id.phone);
                     ADDRESS = (TextView) findViewById(R.id.address);
+                    EMAIL = (TextView) findViewById(R.id.email);
 
                     // display user data in EditText
                     NAME.setText(name);
@@ -143,6 +135,7 @@ public class UserOptionActivity extends Activity {
                     PESEL.setText(pesel);
                     PHONE.setText(phone);
                     ADDRESS.setText(address);
+                    EMAIL.setText(email);
 
                 }
             });
@@ -162,12 +155,14 @@ public class UserOptionActivity extends Activity {
                 String pesel=data.getStringExtra("pesel");
                 String phone=data.getStringExtra("phone");
                 String address=data.getStringExtra("address");
+                String email=data.getStringExtra("email");
 
                 NAME = (TextView) findViewById(R.id.name);
                 SURNAME = (TextView) findViewById(R.id.surname);
                 PESEL = (TextView) findViewById(R.id.pesel);
                 PHONE = (TextView) findViewById(R.id.phone);
                 ADDRESS = (TextView) findViewById(R.id.address);
+                EMAIL = (TextView) findViewById(R.id.email);
 
                 // display user data in EditText
                 NAME.setText(name);
@@ -175,6 +170,7 @@ public class UserOptionActivity extends Activity {
                 PESEL.setText(pesel);
                 PHONE.setText(phone);
                 ADDRESS.setText(address);
+                EMAIL.setText(email);
             }
             if (resultCode == RESULT_CANCELED) {
                 //Write your code if there's no result

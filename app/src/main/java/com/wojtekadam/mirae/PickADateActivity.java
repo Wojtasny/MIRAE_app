@@ -16,56 +16,65 @@ import android.widget.Toast;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class PickADateActivity extends Activity {
     DatePicker calendar;
-    TimePicker time;
+    TimePicker start_time;
+    TimePicker end_time;
+
     Button btnReserve;
     ProgressDialog pDialog;
     String pesel;
     String dzien;
     String godzina;
+    String symptoms;
+    String time_start;
+    String time_end;
     JSONParser jsonParser = new JSONParser();
 
-    private static final String url_reserve = "http://pluton.kt.agh.edu.pl/~wwrobel/reserve.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pick_a_date);
 
-        time = (TimePicker) findViewById(R.id.timePicker);
-        time.setIs24HourView(true);
-        time.setOnTimeChangedListener(mTimePickerListener);
+        start_time = (TimePicker) findViewById(R.id.timePicker);
+        start_time.setIs24HourView(true);
+        start_time.setOnTimeChangedListener(mTimePickerListener);
+        end_time = (TimePicker) findViewById(R.id.timePicker2);
+        end_time.setIs24HourView(true);
         Intent i = getIntent();
-        pesel = i.getStringExtra("pesel");
+        pesel = i.getStringExtra(getString(R.string.TAG_PESEL));
+        symptoms = i.getStringExtra(getString(R.string.TAG_SYMPTOMS));
 
         btnReserve = (Button) findViewById(R.id.btnReserve);
         btnReserve.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View arg0){
-                new Reserve().execute();
+                try {
+                    String str_result = new Reserve().execute().get();
+                }
+                catch (ExecutionException e)
+                {
+
+                }
+                catch (InterruptedException ex)
+                {
+
+                }
+                Intent in = getIntent();
+                setResult(100, in);
+                finish();
             }
         });
 
         calendar = (DatePicker) findViewById(R.id.datePicker);
-        CalendarView date = calendar.getCalendarView();
-
-
-//        date.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
-//
-//            @Override
-//            public void onSelectedDayChange(CalendarView view,
-//                                            int year, int month, int dayOfMonth) {
-//                month += 1;
-//                Toast.makeText(getApplicationContext(),
-//                        dayOfMonth + "/" + month + "/" + year, Toast.LENGTH_LONG).show();
-//            }
-//        });
     }
 
     private static final int TIME_PICKER_INTERVAL=30;
@@ -83,8 +92,10 @@ public class PickADateActivity extends Activity {
                 mIgnoreEvent=true;
                 timePicker.setCurrentMinute(minute);
                 mIgnoreEvent=false;
-            }
 
+            }
+            end_time.setCurrentHour(start_time.getCurrentHour());
+            end_time.setCurrentMinute(start_time.getCurrentMinute());
         }
     };
 
@@ -100,26 +111,38 @@ public class PickADateActivity extends Activity {
         }
         protected String doInBackground(String... params){
 
-            List<NameValuePair> param = new ArrayList<NameValuePair>();
-            param.add(new BasicNameValuePair("pesel", pesel));
-            //-----------------
-            dzien = Integer.toString(calendar.getYear())+"/"+Integer.toString(calendar.getMonth()+1)+"/"+Integer.toString(calendar.getDayOfMonth());
-            godzina = Integer.toString(time.getCurrentHour())+':'+Integer.toString(time.getCurrentMinute());
-            Log.d("data",dzien);
-            Log.d("godzina",godzina);
-            runOnUiThread(new Runnable() {
-                public void run() {
-                    Context context = getApplicationContext();
-                    Toast toast = Toast.makeText(context, dzien+" "+godzina,Toast.LENGTH_LONG);
-                    toast.show();
-                }
-            });
+            dzien = Integer.toString(calendar.getYear())+"-"+Integer.toString(calendar.getMonth()+1)+"-"+Integer.toString(calendar.getDayOfMonth());
+            time_start = Integer.toString(start_time.getCurrentHour())+':'+Integer.toString(start_time.getCurrentMinute());
+            time_end = Integer.toString(end_time.getCurrentHour())+':'+Integer.toString(end_time.getCurrentMinute());
 
-            //-----------------
-//            JSONObject json = jsonParser.makeHttpRequest(
-//                    url_reserve, "POST", param);
+            List<NameValuePair> param = new ArrayList<NameValuePair>();
+            param.add(new BasicNameValuePair(getString(R.string.TAG_PESEL), pesel));
+            param.add(new BasicNameValuePair(getString(R.string.TAG_SYMPTOMS), symptoms));
+            param.add(new BasicNameValuePair("start_time", dzien+ " "+time_start));
+
+            param.add(new BasicNameValuePair("end_time", dzien+ " "+time_end));
+            JSONObject json = jsonParser.makeHttpRequest(getString(R.string.url_reserve),"POST", param);
+
+            // check log cat for response
+            Log.d("Create Response", json.toString());
+
+            // check for success tag
+            try {
+                int success = json.getInt(getString(R.string.TAG_SUCCESS));
+
+                if (success == 1) {
+
+                } else {
+                    // failed to create product
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
             return null;
         }
+
+
         protected void onPostExecute(String file_url) {
             // dismiss the dialog once user updated
             pDialog.dismiss();

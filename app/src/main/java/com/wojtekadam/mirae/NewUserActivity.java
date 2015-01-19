@@ -31,13 +31,8 @@ public class NewUserActivity extends Activity {
     EditText inputPESEL;
     EditText inputPHONE;
     EditText inputADDRESS;
+    EditText inputEMAIL;
 
-
-    // url to create new product
-    private static String url_create_patient = "http://pluton.kt.agh.edu.pl/~wwrobel/new_user.php";
-
-    // JSON Node names
-    private static final String TAG_SUCCESS = "success";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -53,6 +48,7 @@ public class NewUserActivity extends Activity {
         inputPESEL = (EditText) findViewById(R.id.inputPESEL);
         inputPHONE = (EditText) findViewById(R.id.inputPHONE);
         inputADDRESS = (EditText) findViewById(R.id.inputADDRESS);
+        inputEMAIL = (EditText) findViewById(R.id.inputEMAIL);
 
 
         // Create button
@@ -96,27 +92,30 @@ public class NewUserActivity extends Activity {
             String pesel = inputPESEL.getText().toString();
             String phone = inputPHONE.getText().toString();
             String address = inputADDRESS.getText().toString();
+            String email = inputEMAIL.getText().toString();
 
             // Building Parameters
             List<NameValuePair> params = new ArrayList<NameValuePair>();
-            params.add(new BasicNameValuePair("name", name));
-            params.add(new BasicNameValuePair("surname", surname));
-            params.add(new BasicNameValuePair("pesel", pesel));
-            params.add(new BasicNameValuePair("phone", phone));
-            params.add(new BasicNameValuePair("address", address));
-
-
+            params.add(new BasicNameValuePair(getString(R.string.TAG_NAME), name));
+            params.add(new BasicNameValuePair(getString(R.string.TAG_SURNAME), surname));
+            params.add(new BasicNameValuePair(getString(R.string.TAG_PESEL), pesel));
+            params.add(new BasicNameValuePair(getString(R.string.TAG_PHONE), phone));
+            params.add(new BasicNameValuePair(getString(R.string.TAG_ADDRESS), address));
+            params.add(new BasicNameValuePair(getString(R.string.TAG_EMAIL), email));
+            Log.d("User creation params",params.toString());
             // getting JSON Object
             // Note that create product url accepts POST method
-            JSONObject json = jsonParser.makeHttpRequest(url_create_patient,
+            JSONObject json_new_user = jsonParser.makeHttpRequest("http://pluton.kt.agh.edu.pl/~aniedzialkowski/mirae_php_scripts/new_user.php",
                     "POST", params);
 
-            // check log cat for response
-            Log.d("Create Response", json.toString());
+            Log.d("Query json",json_new_user.toString());
+
+
+            Log.d("Create Response", json_new_user.toString());
 
             // check for success tag
             try {
-                int success = json.getInt(TAG_SUCCESS);
+                int success = json_new_user.getInt(getString(R.string.TAG_SUCCESS));
 
                 if (success == 1) {
                     // successfully created product

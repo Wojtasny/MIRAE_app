@@ -29,6 +29,7 @@ public class EditUserActivity extends Activity {
     EditText editPESEL;
     EditText editPHONE;
     EditText editADDRESS;
+    EditText editEMAIL;
     Button btnSave;
     Button btnDelete;
 
@@ -43,24 +44,6 @@ public class EditUserActivity extends Activity {
 
     ArrayList<HashMap<String, String>> patientList;
 
-    // single product url
-    private static final String url_user_details = "http://pluton.kt.agh.edu.pl/~wwrobel/get_user_details.php";
-
-    // url to update product
-    private static final String url_update_user = "http://pluton.kt.agh.edu.pl/~wwrobel/update_user.php";
-
-    // url to delete product
-    private static final String url_delete_user = "http://pluton.kt.agh.edu.pl/~wwrobel/delete_user.php";
-
-    // JSON Node names
-    private static final String TAG_SUCCESS = "success";
-    private static final String TAG_PATIENT = "patient";
-    private static final String TAG_NAME = "name";
-    private static final String TAG_SURNAME = "surname";
-    private static final String TAG_PESEL = "pesel";
-    private static final String TAG_PHONE = "phone";
-    private static final String TAG_ADDRESS = "address";
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,7 +57,7 @@ public class EditUserActivity extends Activity {
         Intent i = getIntent();
 
         // getting product id (pid) from intent
-        pesel = i.getStringExtra(TAG_PESEL);
+        pesel = i.getStringExtra(getString(R.string.TAG_PESEL));
 
         // Getting complete product details in background thread
         new GetUserDetails().execute();
@@ -111,9 +94,9 @@ public class EditUserActivity extends Activity {
 
         String name;
         String surname;
-
         String phone;
         String address;
+        String email;
 
         /**
          * Before starting background thread Show Progress Dialog
@@ -135,28 +118,28 @@ public class EditUserActivity extends Activity {
 
 
             List<NameValuePair> param = new ArrayList<NameValuePair>();
-            param.add(new BasicNameValuePair("pesel", pesel));
+            param.add(new BasicNameValuePair(getString(R.string.TAG_PESEL), pesel));
 
             // getting user details by making HTTP request
             // Note that user details url will use GET request
             JSONObject json = jsonParser.makeHttpRequest(
-                    url_user_details, "GET", param);
+                    getString(R.string.url_user_details), "GET", param);
             //check your log for json response
             Log.d("Single Product Details", json.toString());
 
             try{
-                int success = json.getInt(TAG_SUCCESS);
+                int success = json.getInt(getString(R.string.TAG_SUCCESS));
                 if (success == 1) {
                     // successfully received product details
-                    JSONArray patientOBJ = json.getJSONArray(TAG_PATIENT); // JSON Array
+                    JSONArray patientOBJ = json.getJSONArray(getString(R.string.TAG_PATIENT)); // JSON Array
                     // get first user object from JSON Array
                     JSONObject patient = patientOBJ.getJSONObject(0);
-                    name = patient.getString(TAG_NAME);
-                    surname = patient.getString(TAG_SURNAME);
-                    pesel = patient.getString(TAG_PESEL);
-                    phone = patient.getString(TAG_PHONE);
-                    address = patient.getString(TAG_ADDRESS);
-
+                    name = patient.getString(getString(R.string.TAG_NAME));
+                    surname = patient.getString(getString(R.string.TAG_SURNAME));
+                    pesel = patient.getString(getString(R.string.TAG_PESEL));
+                    phone = patient.getString(getString(R.string.TAG_PHONE));
+                    address = patient.getString(getString(R.string.TAG_ADDRESS));
+                    email = patient.getString(getString(R.string.TAG_EMAIL));
                 }
             }
             catch(JSONException e){
@@ -178,6 +161,7 @@ public class EditUserActivity extends Activity {
                         editPESEL = (EditText) findViewById(R.id.editPESEL);
                         editPHONE = (EditText) findViewById(R.id.editPHONE);
                         editADDRESS = (EditText) findViewById(R.id.editADDRESS);
+                        editEMAIL = (EditText) findViewById(R.id.editEMAIL);
 
                         // display user data in EditText
                         editNAME.setText(name);
@@ -185,7 +169,7 @@ public class EditUserActivity extends Activity {
                         editPESEL.setText(pesel);
                         editPHONE.setText(phone);
                         editADDRESS.setText(address);
-
+                        editEMAIL.setText(email);
 
                 }
             });
@@ -222,33 +206,36 @@ public class EditUserActivity extends Activity {
             String pesel = editPESEL.getText().toString();
             String phone = editPHONE.getText().toString();
             String address = editADDRESS.getText().toString();
+            String email = editEMAIL.getText().toString();
 
             // Building Parameters
             List<NameValuePair> params = new ArrayList<NameValuePair>();
-            params.add(new BasicNameValuePair(TAG_NAME, name));
-            params.add(new BasicNameValuePair(TAG_SURNAME, surname));
-            params.add(new BasicNameValuePair(TAG_PESEL, pesel));
-            params.add(new BasicNameValuePair(TAG_PHONE, phone));
-            params.add(new BasicNameValuePair(TAG_ADDRESS, address));
+            params.add(new BasicNameValuePair(getString(R.string.TAG_NAME), name));
+            params.add(new BasicNameValuePair(getString(R.string.TAG_SURNAME), surname));
+            params.add(new BasicNameValuePair(getString(R.string.TAG_PESEL), pesel));
+            params.add(new BasicNameValuePair(getString(R.string.TAG_PHONE), phone));
+            params.add(new BasicNameValuePair(getString(R.string.TAG_ADDRESS), address));
+            params.add(new BasicNameValuePair(getString(R.string.TAG_EMAIL), email));
 
             // sending modified data through http request
             // Notice that update product url accepts POST method
-            JSONObject json = jsonParser.makeHttpRequest(url_update_user,
+            JSONObject json = jsonParser.makeHttpRequest(getString(R.string.url_update_user),
                     "POST", params);
 
             // check json success tag
             try {
-                int success = json.getInt(TAG_SUCCESS);
+                int success = json.getInt(getString(R.string.TAG_SUCCESS));
 
                 if (success == 1) {
                     // successfully updated
                     Intent returnIntent = new Intent();
                     // send result code 100 to notify about product update
-                    returnIntent.putExtra(TAG_NAME, name);
-                    returnIntent.putExtra(TAG_SURNAME, surname);
-                    returnIntent.putExtra(TAG_PESEL, pesel);
-                    returnIntent.putExtra(TAG_PHONE, phone);
-                    returnIntent.putExtra(TAG_ADDRESS, address);
+                    returnIntent.putExtra(getString(R.string.TAG_NAME), name);
+                    returnIntent.putExtra(getString(R.string.TAG_SURNAME), surname);
+                    returnIntent.putExtra(getString(R.string.TAG_PESEL), pesel);
+                    returnIntent.putExtra(getString(R.string.TAG_PHONE), phone);
+                    returnIntent.putExtra(getString(R.string.TAG_ADDRESS), address);
+                    returnIntent.putExtra(getString(R.string.TAG_EMAIL), email);
                     setResult(RESULT_OK, returnIntent);
 
                     finish();
@@ -299,20 +286,19 @@ public class EditUserActivity extends Activity {
             try {
                 // Building Parameters
                 List<NameValuePair> params = new ArrayList<NameValuePair>();
-                params.add(new BasicNameValuePair("pesel", pesel));
+                params.add(new BasicNameValuePair(getString(R.string.TAG_PESEL), pesel));
 
                 // getting user details by making HTTP request
                 JSONObject json = jsonParser.makeHttpRequest(
-                        url_delete_user, "POST", params);
+                        getString(R.string.url_delete_user), "POST", params);
 
                 // check your log for json response
                 Log.d("Delete User", json.toString());
 
                 // json success tag
-                success = json.getInt(TAG_SUCCESS);
+                success = json.getInt(getString(R.string.TAG_SUCCESS));
                 if (success == 1) {
-                    // user successfully deleted
-                    // notify previous activity by sending code 100
+
                     Intent i = getIntent();
                     // send result code 100 to notify about product deletion
                     setResult(100, i);

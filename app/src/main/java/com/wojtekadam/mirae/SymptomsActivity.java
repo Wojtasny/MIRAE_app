@@ -9,11 +9,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+
 import java.util.Locale;
+
 
 
 public class SymptomsActivity extends Activity{
@@ -22,8 +23,9 @@ public class SymptomsActivity extends Activity{
     private ImageButton btnSpeak;
     private EditText txtSpeechInput;
     private final int REQ_CODE_SPEECH_INPUT = 100;
-    private String speachResponse;
+    //private String speachResponse;
     private String pesel;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -34,7 +36,7 @@ public class SymptomsActivity extends Activity{
         btnJeszcze_raz = (Button) findViewById(R.id.btnJeszcze_raz);
         txtSpeechInput = (EditText) findViewById(R.id.txtSpeechInput);
         Intent i = getIntent();
-        pesel = i.getStringExtra("pesel");
+        pesel = i.getStringExtra(getString(R.string.TAG_PESEL));
 
 
     btnSpeak.setOnClickListener(new View.OnClickListener() {
@@ -54,13 +56,12 @@ public class SymptomsActivity extends Activity{
     btnPotwierdz.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            /*
-            sykrypt do zapisu w bazie o uzycie tego skrytpu!!!!!!!!!!!!!!!!
-             */
-
+            String Symptoms = txtSpeechInput.getText().toString();
             Intent i = new Intent(getApplicationContext(), PickADateActivity.class);
-            i.putExtra("pesel", pesel);
-            startActivity(i);
+            i.putExtra(getString(R.string.TAG_PESEL), pesel);
+            i.putExtra(getString(R.string.TAG_SYMPTOMS), Symptoms);
+            startActivityForResult(i,100);
+            finish();
         }
     });
     }
@@ -86,13 +87,11 @@ public class SymptomsActivity extends Activity{
             case REQ_CODE_SPEECH_INPUT: {
                 if(resultCode == RESULT_OK && null !=data){
                     ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-                    speachResponse = result.get(0);
+                    //speachResponse = result.get(0);
                     txtSpeechInput.setText(result.get(0));
                 }
                 break;
             }
         }
     }
-
-
 }

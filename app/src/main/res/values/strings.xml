@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <string name="app_name">MIRAE</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
@@ -22,6 +21,7 @@
     <string name="btnContinue">Dalej</string>
     <string name="Enter">Rejestrowanie wizyty</string>
     <string name="Symptomy">Symptomy i inne uwagi do lekarza</string>
+    <string name="Email">Email</string>
     <string name="txtInputQuestion">Proszę podać symptomy oraz inne uwagi do lekarza</string>
     <string name="speech_not_supprted">Przepraszamy! Twoje urządzenie nie wspiera wprowadzania tekstu za pomocą mowy :(</string>
     <string name="tap_on_mic">Naciśnij na mikrofon by rozpocząć</string>
@@ -30,7 +30,33 @@
     <string name="ProgressDialogMainScreen">Wyszukiwanie użytkownika o podanym nr PESEL</string>
     <string name="ProgressDialogSaveUser">Zapisywanie danych użytkownika...</string>
     <string name="ProgressDialogDeletingUser">Usuwanie wpisu...</string>
+    <string name="ProgressDialogAddSymptoms">Proszę czekać</string>
     <string name="PorgressDialogCreatingUser">Tworzenie wpisu...</string>
     <string name="ProgressDialogLoadingUsers">Ładowanie danych. Proszę czekać...</string>
+    <string name="TAG_ADDRESS">address</string>
+    <string name="TAG_SUCCESS">success</string>
+    <string name="TAG_PATIENT">patient</string>
+    <string name="TAG_NAME">name</string>
+    <string name="TAG_SURNAME">surname</string>
+    <string name="TAG_PESEL">pesel</string>
+    <string name="TAG_PHONE">phone</string>
+    <string name="TAG_EMAIL">email</string>
+    <string name="TAG_SYMPTOMS">symptoms</string>
+    <string name="email_hint">example@gmail.com</string>
+    <string name="name_hint">Jan</string>
+    <string name="surname_hint">Kowalski</string>
+    <string name="pesel_hint">93011312251</string>
+    <string name="phone_hint">793766808</string>
+    <string name="address_hint">Pomorska 2</string>
+    <string name="start_t">Początek wizyty</string>
+    <string name="end_t">Koniec wizyty</string>
+    <string name="btnVisits">Zobacz swoje wizyty</string>
+    <string name="url_user_details">http://pluton.kt.agh.edu.pl/~aniedzialkowski/mirae_php_scripts/get_user_details.php</string>
+    <string name="url_update_user">http://pluton.kt.agh.edu.pl/~aniedzialkowski/mirae_php_scripts/update_user.php</string>
+    <string name="url_delete_user">http://pluton.kt.agh.edu.pl/~aniedzialkowski/mirae_php_scripts/delete_user.php</string>
+    <string name="url_create_patient">http://pluton.kt.agh.edu.pl/~aniedzialkowski/mirae_php_scripts/new_user.php</string>
+    <string name="url_add_symptoms">http://pluton.kt.agh.edu.pl/~aniedzialkowski/mirae_php_scripts/add_symptoms.php</string>
+    <string name="url_reserve">http://pluton.kt.agh.edu.pl/~aniedzialkowski/mirae_php_scripts/new_appointment.php</string>
+
 
 </resources>
