@@ -56,6 +56,11 @@
             android:label="@string/Symptomy">
         </activity>
 
+        <!-- Wyswietlanie wizyt -->
+        <activity
+            android:name=".VisitsActivity"
+            android:label="@string/Visits">
+        </activity>
     </application>
 
     <!--  Internet Permissions -->

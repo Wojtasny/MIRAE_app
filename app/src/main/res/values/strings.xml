@@ -41,8 +41,16 @@
     <string name="TAG_PESEL">pesel</string>
     <string name="TAG_PHONE">phone</string>
     <string name="TAG_EMAIL">email</string>
+    <string name="TAG_APPOINTMENTS">appointments</string>
     <string name="TAG_SYMPTOMS">symptoms</string>
+    <string name="TAG_ID">Id</string>
+    <string name="TAG_MED_ID">med_id</string>
+    <string name="TAG_ROOM_ID">room_id</string>
+    <string name="TAG_PRICE">price</string>
+    <string name="TAG_START_TIME">start_time</string>
+    <string name="TAG_MEDS">meds</string>
     <string name="email_hint">example@gmail.com</string>
+    <string name="Visits">Wizyty</string>
     <string name="name_hint">Jan</string>
     <string name="surname_hint">Kowalski</string>
     <string name="pesel_hint">93011312251</string>
@@ -56,6 +64,7 @@
     <string name="url_delete_user">http://pluton.kt.agh.edu.pl/~aniedzialkowski/mirae_php_scripts/delete_user.php</string>
     <string name="url_create_patient">http://pluton.kt.agh.edu.pl/~aniedzialkowski/mirae_php_scripts/new_user.php</string>
     <string name="url_add_symptoms">http://pluton.kt.agh.edu.pl/~aniedzialkowski/mirae_php_scripts/add_symptoms.php</string>
+    <string name="url_visits">http://pluton.kt.agh.edu.pl/~aniedzialkowski/mirae_php_scripts/get_appointment_details.php</string>
     <string name="url_reserve">http://pluton.kt.agh.edu.pl/~aniedzialkowski/mirae_php_scripts/new_appointment.php</string>
 
 

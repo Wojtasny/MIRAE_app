@@ -201,6 +201,7 @@ public class AllUsersActivity extends ListActivity {
                             new int[] { R.id.name, R.id.surname, R.id.pesel, R.id.phone, R.id.address });
                     // updating listview
                     setListAdapter(adapter);
+
                 }
             });
 

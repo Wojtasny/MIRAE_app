@@ -23,6 +23,7 @@ public class UserOptionActivity extends Activity {
     JSONParser jsonParser = new JSONParser();
     Button btnEditUser;
     Button btnPickADate;
+    Button btnVisits;
     String pesel;
 
     TextView NAME;
@@ -41,6 +42,7 @@ public class UserOptionActivity extends Activity {
 
         btnEditUser = (Button) findViewById(R.id.btnEditUser);
         btnPickADate = (Button) findViewById(R.id.btnPickADate);
+        btnVisits = (Button) findViewById(R.id.btnVisits);
         Intent i = getIntent();
         pesel = i.getStringExtra("pesel");
 
@@ -58,6 +60,15 @@ public class UserOptionActivity extends Activity {
                 // starting new activity and expecting some response back
                 startActivityForResult(in, 100);
 
+            }
+        });
+
+        btnVisits.setOnClickListener(new View.OnClickListener(){
+            @Override
+        public void onClick(View view){
+                Intent inte = new Intent(getApplicationContext(), VisitsActivity.class);
+                inte.putExtra(getString(R.string.TAG_PESEL), pesel);
+                startActivity(inte);
             }
         });
 
