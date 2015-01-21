@@ -83,14 +83,17 @@ public class VisitsActivity extends ListActivity {
                     for (int i = 0; i < appointmentOBJ.length(); i++) {
                         JSONObject c = appointmentOBJ.getJSONObject(i);
 
+                        String[] tablica = new String[7];
+                        int licz = 0;
                         // Storing each json item in variable
-                        String id = c.getString(getString(R.string.TAG_ID));
-                        String med_id = c.getString(getString(R.string.TAG_MED_ID));
-                        String room_id = c.getString(getString(R.string.TAG_ROOM_ID));
-                        String price = c.getString(getString(R.string.TAG_PRICE));
-                        String start_time = c.getString(getString(R.string.TAG_START_TIME));
-                        String meds = c.getString(getString(R.string.TAG_MEDS));
-                        String symptoms = c.getString(getString(R.string.TAG_SYMPTOMS));
+                        String id = c.getString(getString(R.string.TAG_ID)); if (id == "null") id = getString(R.string.brak_danych);
+                        String med_id = c.getString(getString(R.string.TAG_MED_ID)); if (med_id == "null") med_id = getString(R.string.brak_danych);
+                        String room_id = c.getString(getString(R.string.TAG_ROOM_ID)); if (room_id == "null") room_id = getString(R.string.brak_danych);
+                        String price = c.getString(getString(R.string.TAG_PRICE)); if (price == "null") price = getString(R.string.brak_danych);
+                        String start_time = c.getString(getString(R.string.TAG_START_TIME)); if (start_time == "null") start_time = getString(R.string.brak_danych);
+                        String meds = c.getString(getString(R.string.TAG_MEDS)); if (meds == "null") meds = getString(R.string.brak_danych);
+                        String symptoms = c.getString(getString(R.string.TAG_SYMPTOMS)); if (symptoms == "null") symptoms = getString(R.string.brak_danych);
+
 
                         // creating new HashMap
                         HashMap<String, String> map = new HashMap<String, String>();

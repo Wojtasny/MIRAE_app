@@ -5,6 +5,8 @@
     android:background="@drawable/bg_gradient"
     android:gravity="center_horizontal"
     android:weightSum="1">
+
+
     <Button android:id="@+id/btnPickADate"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"

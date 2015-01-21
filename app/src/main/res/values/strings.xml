@@ -49,7 +49,14 @@
     <string name="TAG_PRICE">price</string>
     <string name="TAG_START_TIME">start_time</string>
     <string name="TAG_MEDS">meds</string>
+    <string name="id_string">ID wizyty</string>
+    <string name="med_id_string">ID Lekarza</string>
+    <string name="room_id_string">Nr pokoju</string>
+    <string name="price_string">Cena wizyty</string>
+    <string name="start_time_string">Czas rozpoczęcia wizyty</string>
+    <string name="meds_string">Przepisane leki</string>
     <string name="email_hint">example@gmail.com</string>
+    <string name="brak_danych">--brak danych--</string>
     <string name="Visits">Wizyty</string>
     <string name="name_hint">Jan</string>
     <string name="surname_hint">Kowalski</string>
