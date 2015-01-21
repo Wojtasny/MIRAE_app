@@ -3,6 +3,7 @@ package com.wojtekadam.mirae;
 import android.app.Activity;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.util.Log;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.Toast;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -84,38 +86,50 @@ public class VisitsActivity extends ListActivity {
                         JSONObject c = appointmentOBJ.getJSONObject(i);
 
                         String[] tablica = new String[7];
-                        int licz = 0;
+                        int ile = 0;
                         // Storing each json item in variable
-                        String id = c.getString(getString(R.string.TAG_ID)); if (id == "null") id = getString(R.string.brak_danych);
-                        String med_id = c.getString(getString(R.string.TAG_MED_ID)); if (med_id == "null") med_id = getString(R.string.brak_danych);
-                        String room_id = c.getString(getString(R.string.TAG_ROOM_ID)); if (room_id == "null") room_id = getString(R.string.brak_danych);
-                        String price = c.getString(getString(R.string.TAG_PRICE)); if (price == "null") price = getString(R.string.brak_danych);
-                        String start_time = c.getString(getString(R.string.TAG_START_TIME)); if (start_time == "null") start_time = getString(R.string.brak_danych);
-                        String meds = c.getString(getString(R.string.TAG_MEDS)); if (meds == "null") meds = getString(R.string.brak_danych);
-                        String symptoms = c.getString(getString(R.string.TAG_SYMPTOMS)); if (symptoms == "null") symptoms = getString(R.string.brak_danych);
 
+
+
+                        tablica[ile] = c.getString(getString(R.string.TAG_ID)); ile++;
+                        tablica[ile] = c.getString(getString(R.string.TAG_MED_ID)); ile++;
+                        tablica[ile] = c.getString(getString(R.string.TAG_ROOM_ID)); ile++;
+                        tablica[ile] = c.getString(getString(R.string.TAG_PRICE)); ile++;
+                        tablica[ile] = c.getString(getString(R.string.TAG_START_TIME)); ile++;
+                        tablica[ile] = c.getString(getString(R.string.TAG_MEDS)); ile++;
+                        tablica[ile] = c.getString(getString(R.string.TAG_SYMPTOMS));
+
+                        int pom = 0;
+                        for(String x : tablica){
+                            if (x == "null") tablica[pom] = getString(R.string.brak_danych);
+                            pom++;
+                        }
 
                         // creating new HashMap
                         HashMap<String, String> map = new HashMap<String, String>();
-
+                        ile = 0;
                         // adding each child node to HashMap key => value
-                        map.put(getString(R.string.TAG_ID), id);
-                        map.put(getString(R.string.TAG_MED_ID), med_id);
-                        map.put(getString(R.string.TAG_ROOM_ID), room_id);
-                        map.put(getString(R.string.TAG_PRICE), price);
-                        map.put(getString(R.string.TAG_START_TIME), start_time);
-                        map.put(getString(R.string.TAG_MEDS), meds);
-                        map.put(getString(R.string.TAG_SYMPTOMS), symptoms);
-
+                        map.put(getString(R.string.TAG_ID), tablica[ile]); ile++;
+                        map.put(getString(R.string.TAG_MED_ID), tablica[ile]); ile++;
+                        map.put(getString(R.string.TAG_ROOM_ID), tablica[ile]); ile++;
+                        map.put(getString(R.string.TAG_PRICE), tablica[ile]); ile++;
+                        map.put(getString(R.string.TAG_START_TIME), tablica[ile]); ile++;
+                        map.put(getString(R.string.TAG_MEDS), tablica[ile]); ile++;
+                        map.put(getString(R.string.TAG_SYMPTOMS), tablica[ile]);
                         // adding HashList to ArrayList
                         visits_LIST.add(map);
                     }
                 } else {
-                    /*
-                    to do co zrobic jak nie ma zadnych wizyt
-                     */
-                }
-            } catch (JSONException e) {
+                    runOnUiThread(new Runnable() {
+                        public void run() {
+                            setContentView(R.layout.visits);
+                            Context context = getApplicationContext();
+                            Toast toast = Toast.makeText(context, "Brak wizyt do wyświetlenia", Toast.LENGTH_LONG);
+                            toast.show();
+                        }
+                    });
+                    }
+                } catch (JSONException e) {
                 e.printStackTrace();
             }
 

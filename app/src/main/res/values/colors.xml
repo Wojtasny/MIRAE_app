@@ -3,6 +3,7 @@
     <color name="white">#ffffff</color>
     <color name="grey">#CCCCCC</color>
     <color name="pomaranczowy">#FF8C00</color>
+    <color name="niebieski">#669DF0</color>
     <color name="bg_gradient_start">#31244e</color>
     <color name="bg_gradient_end">#6b394c</color>
 </resources>
