@@ -2,16 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/niebieski"
+    android:background="@color/zolty"
     android:weightSum="1">
 
     <DatePicker
-        style="@style/TimePicker"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:calendarViewShown="false"
         android:layout_gravity="center"
-        android:textColor="@color/white"
         android:id="@+id/datePicker"
         android:layout_weight="0.14"/>
     <LinearLayout
@@ -22,7 +21,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="25sp"
-            android:textColor="@color/pomaranczowy"
+            android:textColor="@color/czerwony"
             android:layout_weight=".5"
             android:text="@string/start_t"
             />
@@ -30,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="25sp"
-            android:textColor="@color/pomaranczowy"
+            android:textColor="@color/czerwony"
             android:layout_weight=".5"
             android:text="@string/end_t"/>
 
@@ -42,19 +41,15 @@
         android:layout_weight="0.14">
     <TimePicker
         android:layout_width="wrap_content"
-        style="@style/TimePicker"
-        android:layout_height="wrap_content"
 
-        android:textColor="@color/white"
+        android:layout_height="wrap_content"
         android:id="@+id/timePicker"
         android:clickable="false" />
 
     <TimePicker
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="@style/TimePicker"
 
-        android:textColor="@color/white"
         android:id="@+id/timePicker2"
         android:clickable="false" />
 
@@ -66,5 +61,6 @@
         android:text="@string/Reserve"
         android:id="@+id/btnReserve"
         android:layout_gravity="center"
+        android:textColor="@color/grey"
         android:layout_weight="0.5" />
 </LinearLayout>

@@ -3,7 +3,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
-    android:background="@drawable/bg_gradient"
+    android:background="@color/grey"
     android:gravity="center_horizontal"
     android:weightSum="1">
 
@@ -17,7 +17,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/DajPESEL"
-        android:textColor="@color/pomaranczowy"
+        android:textColor="@color/czerwony"
         android:paddingLeft="10dip"
         android:paddingRight="10dip"
         android:paddingTop="100dip"
@@ -30,7 +30,7 @@
         android:layout_margin="5dip"
         android:layout_marginBottom="15dip"
         android:singleLine="true"
-        android:textColor="@color/white"
+        android:textColor="@color/zolty"
         android:textSize="30dip"
         android:inputType="numberDecimal"/>
 
