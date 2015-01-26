@@ -12,6 +12,7 @@ import org.json.JSONObject;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -19,7 +20,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-
+import android.widget.Toast;
 
 
 public class EditUserActivity extends Activity {
@@ -34,6 +35,7 @@ public class EditUserActivity extends Activity {
     Button btnDelete;
 
     String pesel;
+
 
 
     // Progress Dialog
@@ -122,7 +124,7 @@ public class EditUserActivity extends Activity {
 
             // getting user details by making HTTP request
             // Note that user details url will use GET request
-            JSONObject json = jsonParser.makeHttpRequest(
+            final JSONObject json = jsonParser.makeHttpRequest(
                     getString(R.string.url_user_details), "GET", param);
             //check your log for json response
             Log.d("Single Product Details", json.toString());
@@ -131,9 +133,8 @@ public class EditUserActivity extends Activity {
                 int success = json.getInt(getString(R.string.TAG_SUCCESS));
                 if (success == 1) {
                     // successfully received product details
-                    JSONArray patientOBJ = json.getJSONArray(getString(R.string.TAG_PATIENT)); // JSON Array
+                    JSONObject patient = json.getJSONObject(getString(R.string.TAG_PATIENT)); // JSON Array
                     // get first user object from JSON Array
-                    JSONObject patient = patientOBJ.getJSONObject(0);
                     name = patient.getString(getString(R.string.TAG_NAME));
                     surname = patient.getString(getString(R.string.TAG_SURNAME));
                     pesel = patient.getString(getString(R.string.TAG_PESEL));
@@ -143,10 +144,25 @@ public class EditUserActivity extends Activity {
                 }
             }
             catch(JSONException e){
-                //wyjatek
-            }
+                runOnUiThread(new Runnable() {
+                                  public void run() {
+                                      setContentView(R.layout.user_options);
+                                      Context context = getApplicationContext();
+                                      String wiadomosc = null;
+                                      try {
+                                          wiadomosc = json.getString(getString(R.string.TAG_Message));
+                                      } catch (JSONException e1) {
+                                          e1.printStackTrace();
+                                      }
+                                      Toast toast = Toast.makeText(context, "Wystąpił błąd: " + wiadomosc, Toast.LENGTH_LONG);
+                                      toast.show();
+                                  }
+                              });
 
-            return null;
+                    finish();
+                }
+
+                return null;
         }
         protected void onPostExecute(String file_url) {
             // dismiss the dialog once got all details
@@ -219,7 +235,7 @@ public class EditUserActivity extends Activity {
 
             // sending modified data through http request
             // Notice that update product url accepts POST method
-            JSONObject json = jsonParser.makeHttpRequest(getString(R.string.url_update_user),
+            final JSONObject json = jsonParser.makeHttpRequest(getString(R.string.url_update_user),
                     "POST", params);
 
             // check json success tag
@@ -237,10 +253,25 @@ public class EditUserActivity extends Activity {
                     returnIntent.putExtra(getString(R.string.TAG_ADDRESS), address);
                     returnIntent.putExtra(getString(R.string.TAG_EMAIL), email);
                     setResult(RESULT_OK, returnIntent);
-
+                    pDialog.dismiss();
                     finish();
                 } else {
-                    // failed to update product
+                    runOnUiThread(new Runnable() {
+                        public void run() {
+                            setContentView(R.layout.user_options);
+                            Context context = getApplicationContext();
+                            String wiadomosc = null;
+                            try {
+                                wiadomosc = json.getString(getString(R.string.TAG_Message));
+                            } catch (JSONException e1) {
+                                e1.printStackTrace();
+                            }
+                            Toast toast = Toast.makeText(context, "Wystąpił błąd: " + wiadomosc, Toast.LENGTH_LONG);
+                            toast.show();
+                        }
+                    });
+
+                    finish();
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -254,7 +285,7 @@ public class EditUserActivity extends Activity {
          * **/
         protected void onPostExecute(String file_url) {
             // dismiss the dialog once user updated
-            pDialog.dismiss();
+
         }
     }
 
@@ -289,7 +320,7 @@ public class EditUserActivity extends Activity {
                 params.add(new BasicNameValuePair(getString(R.string.TAG_PESEL), pesel));
 
                 // getting user details by making HTTP request
-                JSONObject json = jsonParser.makeHttpRequest(
+                final JSONObject json = jsonParser.makeHttpRequest(
                         getString(R.string.url_delete_user), "POST", params);
 
                 // check your log for json response
@@ -298,14 +329,50 @@ public class EditUserActivity extends Activity {
                 // json success tag
                 success = json.getInt(getString(R.string.TAG_SUCCESS));
                 if (success == 1) {
-
+                    runOnUiThread(new Runnable() {
+                                      public void run() {
+                                          setContentView(R.layout.main_screen);
+                                          Context context = getApplicationContext();
+                                          String wiadomosc = null;
+                                          try {
+                                              wiadomosc = json.getString(getString(R.string.TAG_Message));
+                                          } catch (JSONException e1) {
+                                              e1.printStackTrace();
+                                          }
+                                          Toast toast = Toast.makeText(context, wiadomosc, Toast.LENGTH_LONG);
+                                          toast.show();
+                                      }
+                                  });
+                    finish();
                     Intent i = getIntent();
                     // send result code 100 to notify about product deletion
                     setResult(100, i);
+                    Intent inte = new Intent(getApplicationContext(), MainScreenActivity.class);
+                    startActivity(inte);
                     finish();
+
                 }
-            } catch (JSONException e) {
+                else{
+                    runOnUiThread(new Runnable() {
+                                      public void run() {
+                                          setContentView(R.layout.user_options);
+                                          Context context = getApplicationContext();
+                                          String wiadomosc = null;
+                                          try {
+                                              wiadomosc = json.getString(getString(R.string.TAG_Message));
+                                          } catch (JSONException e1) {
+                                              e1.printStackTrace();
+                                          }
+                                          Toast toast = Toast.makeText(context, "Wystąpił błąd: " + wiadomosc, Toast.LENGTH_LONG);
+                                          toast.show();
+                                      }
+                                  });
+
+                        finish();
+                    }
+                } catch (JSONException e) {
                 e.printStackTrace();
+
             }
 
             return null;

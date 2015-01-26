@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CalendarView;
 import android.widget.DatePicker;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -32,11 +31,11 @@ public class PickADateActivity extends Activity {
     ProgressDialog pDialog;
     String pesel;
     String dzien;
-    String godzina;
+
     String symptoms;
     String time_start;
     String time_end;
-    JSONParser jsonParser = new JSONParser();
+    JSONParser jsonParserek = new JSONParser();
 
 
     @Override
@@ -53,6 +52,7 @@ public class PickADateActivity extends Activity {
         pesel = i.getStringExtra(getString(R.string.TAG_PESEL));
         symptoms = i.getStringExtra(getString(R.string.TAG_SYMPTOMS));
 
+
         btnReserve = (Button) findViewById(R.id.btnReserve);
         btnReserve.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -62,11 +62,11 @@ public class PickADateActivity extends Activity {
                 }
                 catch (ExecutionException e)
                 {
-
+//
                 }
                 catch (InterruptedException ex)
                 {
-
+//
                 }
                 Intent in = getIntent();
                 setResult(100, in);
@@ -121,22 +121,48 @@ public class PickADateActivity extends Activity {
             param.add(new BasicNameValuePair("start_time", dzien+ " "+time_start));
 
             param.add(new BasicNameValuePair("end_time", dzien+ " "+time_end));
-            JSONObject json = jsonParser.makeHttpRequest(getString(R.string.url_reserve),"POST", param);
+            final JSONObject jsonek = jsonParserek.makeHttpRequest(getString(R.string.url_reserve),"POST", param);
 
             // check log cat for response
-            Log.d("Create Response", json.toString());
+            Log.d("Create Response", jsonek.toString());
+
 
             // check for success tag
             try {
-                int success = json.getInt(getString(R.string.TAG_SUCCESS));
+                int success = jsonek.getInt(getString(R.string.TAG_SUCCESS));
 
                 if (success == 1) {
+                    runOnUiThread(new Runnable() {
+                        public void run() {
+                            setContentView(R.layout.user_options);
+                            Context context = getApplicationContext();
+                            Toast toast = Toast.makeText(context, "Rejestracja zakończona sukcesem",Toast.LENGTH_LONG);
+                            toast.show();
+                        }
+                    });
 
                 } else {
-                    // failed to create product
+                    runOnUiThread(new Runnable() {
+                    public void run() {
+                        setContentView(R.layout.user_options);
+                        Context context = getApplicationContext();
+                        String wiadomosc = null;
+                        try {
+                            wiadomosc = jsonek.getString(getString(R.string.TAG_Message));
+                        } catch (JSONException e1) {
+                            e1.printStackTrace();
+                        }
+                        Toast toast = Toast.makeText(context, "Wystąpił błąd: " + wiadomosc, Toast.LENGTH_LONG);
+                        toast.show();
+                    }
+                });
+
+                    finish();
+
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
+
             }
 
             return null;
@@ -146,6 +172,7 @@ public class PickADateActivity extends Activity {
         protected void onPostExecute(String file_url) {
             // dismiss the dialog once user updated
             pDialog.dismiss();
+
         }
     }
 }

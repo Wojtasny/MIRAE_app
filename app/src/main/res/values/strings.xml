@@ -43,12 +43,13 @@
     <string name="TAG_EMAIL">email</string>
     <string name="TAG_APPOINTMENTS">appointments</string>
     <string name="TAG_SYMPTOMS">symptoms</string>
-    <string name="TAG_ID">Id</string>
+    <string name="TAG_ID">id</string>
     <string name="TAG_MED_ID">med_id</string>
     <string name="TAG_ROOM_ID">room_id</string>
     <string name="TAG_PRICE">price</string>
     <string name="TAG_START_TIME">start_time</string>
     <string name="TAG_MEDS">meds</string>
+    <string name="TAG_Message">message</string>
     <string name="id_string">ID wizyty</string>
     <string name="med_id_string">ID Lekarza</string>
     <string name="room_id_string">Nr pokoju</string>

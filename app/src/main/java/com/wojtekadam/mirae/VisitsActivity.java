@@ -1,6 +1,5 @@
 package com.wojtekadam.mirae;
 
-import android.app.Activity;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -9,7 +8,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ListAdapter;
-import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
@@ -69,7 +67,7 @@ public class VisitsActivity extends ListActivity {
             JSONObject json = jsonParser.makeHttpRequest(getString(R.string.url_visits), "GET", param);
 
             // Check your log cat for JSON response
-            Log.d("All Patients: ", json.toString());
+            Log.d("All Appointments: ", json.toString());
 
             try {
                 // Checking for SUCCESS TAG
@@ -122,12 +120,13 @@ public class VisitsActivity extends ListActivity {
                 } else {
                     runOnUiThread(new Runnable() {
                         public void run() {
-                            setContentView(R.layout.visits);
+                            setContentView(R.layout.user_options);
                             Context context = getApplicationContext();
                             Toast toast = Toast.makeText(context, "Brak wizyt do wyświetlenia", Toast.LENGTH_LONG);
                             toast.show();
                         }
                     });
+                    finish();
                     }
                 } catch (JSONException e) {
                 e.printStackTrace();

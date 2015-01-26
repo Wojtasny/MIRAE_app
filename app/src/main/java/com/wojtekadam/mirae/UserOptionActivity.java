@@ -1,6 +1,7 @@
 package com.wojtekadam.mirae;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -102,24 +104,47 @@ public class UserOptionActivity extends Activity {
 
             // getting user details by making HTTP request
             // Note that user details url will use GET request
-            JSONObject json = jsonParser.makeHttpRequest(getString(R.string.url_user_details), "GET", param);
+            final JSONObject json = jsonParser.makeHttpRequest(getString(R.string.url_user_details), "GET", param);
             //check your log for json response
             Log.d("Single Product Details", json.toString());
 
             try{
                 int success = json.getInt(getString(R.string.TAG_SUCCESS));
+                Log.d("test", String.valueOf(success));
+
                 if (success == 1) {
+
                     // successfully received product details
-                    JSONArray patientOBJ = json.getJSONArray(getString(R.string.TAG_PATIENT)); // JSON Array
+                    JSONObject patient = json.getJSONObject(getString(R.string.TAG_PATIENT)); // JSON Array
+
                     // get first user object from JSON Array
-                    JSONObject patient = patientOBJ.getJSONObject(0);
+//                    JSONObject patient = patientOBJ.getJSONObject(0);
+
                     name = patient.getString(getString(R.string.TAG_NAME));
+
                     surname = patient.getString(getString(R.string.TAG_SURNAME));
                     pesel = patient.getString(getString(R.string.TAG_PESEL));
                     phone = patient.getString(getString(R.string.TAG_PHONE));
                     address = patient.getString(getString(R.string.TAG_ADDRESS));
                     email = patient.getString(getString(R.string.TAG_EMAIL));
 
+                }
+                else{
+                    runOnUiThread(new Runnable() {
+                                      public void run() {
+                                          setContentView(R.layout.user_options);
+                                          Context context = getApplicationContext();
+                                          String wiadomosc = null;
+                                          try {
+                                              wiadomosc = json.getString(getString(R.string.TAG_Message));
+                                          } catch (JSONException e1) {
+                                              e1.printStackTrace();
+                                          }
+                                          Toast toast = Toast.makeText(context, "Wystąpił błąd: " + wiadomosc, Toast.LENGTH_LONG);
+                                          toast.show();
+                                      }
+                                  });
+                    finish();
                 }
             }
             catch(JSONException e){
@@ -156,8 +181,7 @@ public class UserOptionActivity extends Activity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == 0) {
+        if (requestCode == 100) {
 
             if(resultCode == RESULT_OK){
 

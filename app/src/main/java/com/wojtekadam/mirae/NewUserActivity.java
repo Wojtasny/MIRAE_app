@@ -105,7 +105,7 @@ public class NewUserActivity extends Activity {
             Log.d("User creation params",params.toString());
             // getting JSON Object
             // Note that create product url accepts POST method
-            JSONObject json_new_user = jsonParser.makeHttpRequest("http://pluton.kt.agh.edu.pl/~aniedzialkowski/mirae_php_scripts/new_user.php",
+            final JSONObject json_new_user = jsonParser.makeHttpRequest("http://pluton.kt.agh.edu.pl/~aniedzialkowski/mirae_php_scripts/new_user.php",
                     "POST", params);
 
             Log.d("Query json",json_new_user.toString());
@@ -119,15 +119,37 @@ public class NewUserActivity extends Activity {
 
                 if (success == 1) {
                     // successfully created product
+                    runOnUiThread(new Runnable() {
+                                      public void run() {
+                                          setContentView(R.layout.user_options);
+                                          Context context = getApplicationContext();
+                                          Toast toast = Toast.makeText(context, "Poprawnie utworzono profil użytkownika", Toast.LENGTH_LONG);
+                                          toast.show();
+                                      }
+                                  });
                     Intent i = new Intent(getApplicationContext(), UserOptionActivity.class);
                     i.putExtra("pesel", pesel);
                     startActivity(i);
 
                     finish();
                 } else {
-                    // failed to create product
-                }
-            } catch (JSONException e) {
+                    runOnUiThread(new Runnable() {
+                        public void run() {
+                            setContentView(R.layout.add_user);
+                            Context context = getApplicationContext();
+                            String wiadomosc = null;
+                            try {
+                                wiadomosc = json_new_user.getString(getString(R.string.TAG_Message));
+                            } catch (JSONException e1) {
+                                e1.printStackTrace();
+                            }
+                            Toast toast = Toast.makeText(context, "Wystąpił błąd: "+wiadomosc, Toast.LENGTH_LONG);
+                            toast.show();
+                            finish();
+                        }
+                    });
+                    }
+                } catch (JSONException e) {
                 e.printStackTrace();
             }
 
