@@ -120,7 +120,7 @@ public class VisitsActivity extends ListActivity {
                 } else {
                     runOnUiThread(new Runnable() {
                         public void run() {
-                            setContentView(R.layout.user_options);
+
                             Context context = getApplicationContext();
                             Toast toast = Toast.makeText(context, "Brak wizyt do wyświetlenia", Toast.LENGTH_LONG);
                             toast.show();
