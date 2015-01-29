@@ -28,13 +28,6 @@ public class UserOptionActivity extends Activity {
     Button btnVisits;
     String pesel;
 
-    TextView NAME;
-    TextView SURNAME;
-    TextView PESEL;
-    TextView PHONE;
-    TextView ADDRESS;
-    TextView EMAIL;
-
     @Override
     protected void onCreate(Bundle savedInstanceState){
 
@@ -155,26 +148,6 @@ public class UserOptionActivity extends Activity {
         }
         protected void onPostExecute(String file_url) {
 
-            runOnUiThread(new Runnable() {
-                public void run() {
-                    // Edit Text
-                    NAME = (TextView) findViewById(R.id.name);
-                    SURNAME = (TextView) findViewById(R.id.surname);
-                    PESEL = (TextView) findViewById(R.id.pesel);
-                    PHONE = (TextView) findViewById(R.id.phone);
-                    ADDRESS = (TextView) findViewById(R.id.address);
-                    EMAIL = (TextView) findViewById(R.id.email);
-
-                    // display user data in EditText
-                    NAME.setText(name);
-                    SURNAME.setText(surname);
-                    PESEL.setText(pesel);
-                    PHONE.setText(phone);
-                    ADDRESS.setText(address);
-                    EMAIL.setText(email);
-
-                }
-            });
 
         }
     }
@@ -192,20 +165,6 @@ public class UserOptionActivity extends Activity {
                 String address=data.getStringExtra("address");
                 String email=data.getStringExtra("email");
 
-                NAME = (TextView) findViewById(R.id.name);
-                SURNAME = (TextView) findViewById(R.id.surname);
-                PESEL = (TextView) findViewById(R.id.pesel);
-                PHONE = (TextView) findViewById(R.id.phone);
-                ADDRESS = (TextView) findViewById(R.id.address);
-                EMAIL = (TextView) findViewById(R.id.email);
-
-                // display user data in EditText
-                NAME.setText(name);
-                SURNAME.setText(surname);
-                PESEL.setText(pesel);
-                PHONE.setText(phone);
-                ADDRESS.setText(address);
-                EMAIL.setText(email);
             }
             if (resultCode == RESULT_CANCELED) {
                 //Write your code if there's no result
