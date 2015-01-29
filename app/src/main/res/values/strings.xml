@@ -50,6 +50,7 @@
     <string name="TAG_START_TIME">start_time</string>
     <string name="TAG_MEDS">meds</string>
     <string name="TAG_Message">message</string>
+    <string name="url_queue">http://pluton.kt.agh.edu.pl/~aniedzialkowski/mirae_php_scripts/add_to_queue.php</string>
     <string name="id_string">ID wizyty</string>
     <string name="med_id_string">ID Lekarza</string>
     <string name="room_id_string">Nr pokoju</string>
@@ -60,6 +61,7 @@
     <string name="brak_danych">--brak danych--</string>
     <string name="Visits">Wizyty</string>
     <string name="name_hint">Jan</string>
+    <string name="TAG_POSITION">position</string>
     <string name="surname_hint">Kowalski</string>
     <string name="pesel_hint">93011312251</string>
     <string name="phone_hint">793766808</string>
@@ -68,6 +70,7 @@
     <string name="end_t">Koniec wizyty</string>
     <string name="btnVisits">Zobacz swoje wizyty</string>
     <string name="url_user_details">http://pluton.kt.agh.edu.pl/~aniedzialkowski/mirae_php_scripts/get_user_details.php</string>
+    <string name="url_user_queue">http://pluton.kt.agh.edu.pl/~aniedzialkowski/mirae_php_scripts/get_queue_position.php</string>
     <string name="url_update_user">http://pluton.kt.agh.edu.pl/~aniedzialkowski/mirae_php_scripts/update_user.php</string>
     <string name="url_delete_user">http://pluton.kt.agh.edu.pl/~aniedzialkowski/mirae_php_scripts/delete_user.php</string>
     <string name="url_create_patient">http://pluton.kt.agh.edu.pl/~aniedzialkowski/mirae_php_scripts/new_user.php</string>

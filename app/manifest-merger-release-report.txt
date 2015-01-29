@@ -83,10 +83,16 @@ ADDED from AndroidManifest.xml:60:9
 		ADDED from AndroidManifest.xml:62:13
 	android:name
 		ADDED from AndroidManifest.xml:61:13
-uses-permission#android.permission.INTERNET
-ADDED from AndroidManifest.xml:67:5
+activity#com.wojtekadam.mirae.QueueActivity
+ADDED from AndroidManifest.xml:64:9
+	android:label
+		ADDED from AndroidManifest.xml:65:13
 	android:name
-		ADDED from AndroidManifest.xml:67:22
+		ADDED from AndroidManifest.xml:64:19
+uses-permission#android.permission.INTERNET
+ADDED from AndroidManifest.xml:71:5
+	android:name
+		ADDED from AndroidManifest.xml:71:22
 uses-sdk
 INJECTED from AndroidManifest.xml:0:0 reason: use-sdk injection requested
 	android:targetSdkVersion

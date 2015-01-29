@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
@@ -23,25 +23,29 @@
         android:paddingTop="10dip"
         android:textSize="35dip"
         android:id="@+id/text"
-        android:layout_gravity="center" />
+        android:layout_gravity="center"
+        android:layout_above="@+id/inputPESEL"
+        android:layout_centerHorizontal="true" />
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/imageView"
-        android:src="@drawable/healthcare" />
+        android:src="@drawable/healthcare"
+        android:layout_above="@+id/text"
+        android:layout_centerHorizontal="true" />
 
     <EditText android:id="@+id/inputPESEL"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="0dp"
-        android:layout_marginBottom="15dip"
         android:singleLine="true"
         android:textColor="@color/dark_gray"
         android:textSize="30dip"
         android:inputType="numberDecimal"
-        android:layout_marginTop="0dp"
-        android:layout_weight="0.28" />
+        android:layout_weight="0.28"
+        android:layout_above="@+id/btnContinue"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <Button android:id="@+id/btnContinue"
         android:layout_width="307dp"
@@ -50,8 +54,11 @@
         android:textSize="25dip"
         android:text="@string/btnContinue"
         android:clickable="true"
-        android:layout_marginTop="20dp"
-        android:background="@color/dark_gray" />
+        android:background="@color/dark_gray"
+        android:layout_marginBottom="74dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/imageView"
+        android:layout_alignEnd="@+id/imageView" />
 
 
-</LinearLayout>
+</RelativeLayout>

@@ -158,7 +158,8 @@
             android:layout_weight=".5"
             android:textColor="@color/white"
             android:textSize="25sp"
-            android:text="@string/SaveChanges" />
+            android:text="@string/SaveChanges"
+            android:background="@color/dark_gray" />
 
         <!-- Button Delete Product -->
         <Button android:id="@+id/btnDelete"
@@ -167,7 +168,9 @@
             android:layout_height="match_parent"
             android:textColor="@color/white"
             android:textSize="25sp"
-            android:text="@string/Delete" />
+            android:layout_marginLeft="5dp"
+            android:text="@string/Delete"
+            android:background="@color/dark_gray" />
         </LinearLayout>
 
     </RelativeLayout>

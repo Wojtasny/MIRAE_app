@@ -28,6 +28,7 @@ public class PickADateActivity extends Activity {
     TimePicker end_time;
 
     Button btnReserve;
+    Button btnQueue;
     ProgressDialog pDialog;
     String pesel;
     String dzien;
@@ -52,7 +53,20 @@ public class PickADateActivity extends Activity {
         pesel = i.getStringExtra(getString(R.string.TAG_PESEL));
         symptoms = i.getStringExtra(getString(R.string.TAG_SYMPTOMS));
 
-
+        btnQueue = (Button) findViewById(R.id.btnQueue);
+        btnQueue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    String str_result = new Queue().execute().get();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                }
+                finish();
+            }
+        });
         btnReserve = (Button) findViewById(R.id.btnReserve);
         btnReserve.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -156,6 +170,94 @@ public class PickADateActivity extends Activity {
                         toast.show();
                     }
                 });
+
+                    finish();
+
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+
+            }
+
+            return null;
+        }
+
+
+        protected void onPostExecute(String file_url) {
+            // dismiss the dialog once user updated
+            pDialog.dismiss();
+
+        }
+    }
+    class Queue extends AsyncTask<String, String, String>{
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pDialog = new ProgressDialog(PickADateActivity.this);
+            pDialog.setMessage(getString(R.string.ProgressDialogPickADate));
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(false);
+            pDialog.show();
+        }
+        protected String doInBackground(String... params){
+
+            List<NameValuePair> param = new ArrayList<NameValuePair>();
+            param.add(new BasicNameValuePair(getString(R.string.TAG_PESEL), pesel));
+            param.add(new BasicNameValuePair(getString(R.string.TAG_SYMPTOMS), symptoms));
+
+            final JSONObject jsonek = jsonParserek.makeHttpRequest(getString(R.string.url_queue),"POST", param);
+
+            // check log cat for response
+            Log.d("Queue Response", jsonek.toString());
+
+
+            // check for success tag
+            try {
+                int success = jsonek.getInt(getString(R.string.TAG_SUCCESS));
+
+                if (success == 1) {
+                    runOnUiThread(new Runnable() {
+                        public void run() {
+                            setContentView(R.layout.user_options);
+                            Context context = getApplicationContext();
+                            Toast toast = Toast.makeText(context, "Zakolejkowanie zakończone sukcesem",Toast.LENGTH_LONG);
+                            toast.show();
+                            String pozycja = null;
+                            try {
+                                pozycja = jsonek.getString(getString(R.string.TAG_POSITION));
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+
+                            }
+                            Log.d("Janusz", pozycja);
+                            if (pozycja.equals("-1")) {
+                                Toast toast3 = Toast.makeText(context, "Jesteś juz w kolejce na ten dzień", Toast.LENGTH_LONG);
+                                toast3.show();
+                                Log.d("Janusz","Janusz");
+                            }
+                            else{
+                                Toast toast2 = Toast.makeText(context, "Twoja pozycja w kolejce: " + pozycja, Toast.LENGTH_LONG);
+                                toast2.show();
+                            }
+
+                        }
+                    });
+
+                } else {
+                    runOnUiThread(new Runnable() {
+                        public void run() {
+                            setContentView(R.layout.user_options);
+                            Context context = getApplicationContext();
+                            String wiadomosc = null;
+                            try {
+                                wiadomosc = jsonek.getString(getString(R.string.TAG_Message));
+                            } catch (JSONException e1) {
+                                e1.printStackTrace();
+                            }
+                            Toast toast = Toast.makeText(context, "Wystąpił błąd: " + wiadomosc, Toast.LENGTH_LONG);
+                            toast.show();
+                        }
+                    });
 
                     finish();
 

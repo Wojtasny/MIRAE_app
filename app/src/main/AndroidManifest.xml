@@ -61,6 +61,10 @@
             android:name=".VisitsActivity"
             android:label="@string/Visits">
         </activity>
+        <activity android:name=".QueueActivity"
+            android:label="Kolejka"
+            />
+
     </application>
 
     <!--  Internet Permissions -->
