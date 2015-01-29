@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/MIRAE.iml" filepath="$PROJECT_DIR$/MIRAE.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/wojtek_mirae.iml" filepath="$PROJECT_DIR$/wojtek_mirae.iml" />
     </modules>
   </component>
 </project>

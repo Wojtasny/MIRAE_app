@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/zolty">
+    android:background="@color/white">
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -11,7 +11,7 @@
     <TextView android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/Symptomy"
-        android:textColor="@color/czerwony"
+        android:textColor="@color/dark_gray"
         android:paddingLeft="10dip"
         android:paddingRight="10dip"
         android:paddingTop="10dip"
@@ -25,7 +25,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:textColor="@color/grey"
+            android:textColor="@color/light_blue"
             android:textSize="26sp"
             android:textStyle="normal"  />
     </ScrollView>
@@ -38,14 +38,16 @@
         android:layout_centerHorizontal="true"
         android:gravity="center"
         android:orientation="horizontal"
-        android:layout_above="@+id/linearLayout">
+        android:layout_above="@+id/linearLayout"
+        android:id="@+id/linearLayout3">
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Potwierdź"
             android:textColor="@color/white"
             android:id="@+id/btnTak"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:background="@color/dark_gray" />
 
         <Button
             android:layout_width="wrap_content"
@@ -53,7 +55,8 @@
             android:text="Jeszcze raz"
             android:id="@+id/btnJeszcze_raz"
             android:textColor="@color/white"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:background="@color/dark_gray" />
     </LinearLayout>
     <LinearLayout
         android:layout_width="wrap_content"
@@ -64,24 +67,26 @@
         android:orientation="vertical"
         android:id="@+id/linearLayout">
 
-        <ImageButton
-            android:id="@+id/btnSpeak"
-            android:contentDescription="Obrazek mikrofonu"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@null"
-            android:src="@drawable/ico_mic"/>
-
         <TextView
             android:layout_width="wrap_content"
             android:contentDescription="Napis pod obrazkiem mikrofonu"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="@string/tap_on_mic"
-            android:textColor="@color/grey"
+            android:textColor="@color/dark_gray"
             android:textSize="15sp"
             android:textStyle="normal"/>
     </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/btnSpeak"
+        android:contentDescription="Obrazek mikrofonu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:src="@drawable/ico_mic"
+        android:layout_above="@+id/linearLayout3"
+        android:layout_centerHorizontal="true" />
 
 
 </RelativeLayout>

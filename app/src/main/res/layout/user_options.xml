@@ -2,9 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/grey"
+    android:background="@color/white"
     android:gravity="center_horizontal"
-    android:weightSum="1">
+    android:weightSum="1"
+    android:id="@+id/user_options">
 
 
     <Button android:id="@+id/btnPickADate"
@@ -14,7 +15,8 @@
         android:textSize="25sp"
         android:text="@string/Enter"
         android:layout_marginTop="25dip"
-        android:layout_weight="0.2" />
+        android:layout_weight="0.2"
+        android:background="@color/dark_gray" />
 
     <Button android:id="@+id/btnEditUser"
         android:layout_width="fill_parent"
@@ -23,7 +25,8 @@
         android:textSize="25sp"
         android:text="@string/Edit_User"
         android:layout_marginTop="25dip"
-        android:layout_weight="0.2" />
+        android:layout_weight="0.2"
+        android:background="@color/dark_gray" />
 
     <Button
         android:layout_width="fill_parent"
@@ -34,84 +37,6 @@
         android:text="@string/btnVisits"
         android:textColor="@color/white"
         android:textSize="25sp"
-        />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="50dip">
-
-        <TextView
-            android:id="@+id/name"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/zolty"
-            android:paddingTop="6dip"
-            android:paddingLeft="6dip"
-            android:paddingRight="6dip"
-            android:paddingStart="6dip"
-            android:textSize="17sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/surname"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/zolty"
-            android:paddingTop="6dip"
-            android:paddingLeft="6dip"
-            android:paddingRight="6dip"
-            android:paddingStart="6dip"
-            android:textSize="17sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/pesel"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/zolty"
-            android:paddingTop="6dip"
-            android:paddingLeft="6dip"
-            android:paddingRight="6dip"
-            android:paddingStart="6dip"
-            android:textSize="17sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/phone"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/zolty"
-            android:paddingTop="6dip"
-            android:paddingLeft="6dip"
-            android:paddingRight="6dip"
-            android:paddingStart="6dip"
-            android:textSize="17sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/address"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/zolty"
-            android:paddingTop="6dip"
-            android:paddingLeft="6dip"
-            android:paddingRight="6dip"
-            android:paddingStart="6dip"
-            android:textSize="17sp"
-            android:textStyle="bold" />
-        <TextView
-            android:id="@+id/email"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/zolty"
-            android:paddingTop="6dip"
-            android:paddingLeft="6dip"
-            android:paddingRight="6dip"
-            android:paddingStart="6dip"
-            android:textSize="17sp"
-            android:textStyle="bold" />
-
-        </LinearLayout>
+        android:background="@color/dark_gray" />
 
 </LinearLayout>

@@ -3,7 +3,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
-    android:background="@color/grey"
+    android:background="@color/white"
     android:gravity="center_horizontal"
     android:weightSum="1">
 
@@ -14,34 +14,44 @@
     <!--  Button to create a new product screen -->
 
     <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_height="76dp"
         android:text="@string/DajPESEL"
-        android:textColor="@color/czerwony"
+        android:textColor="@color/dark_gray"
         android:paddingLeft="10dip"
         android:paddingRight="10dip"
-        android:paddingTop="100dip"
-        android:textSize="30dip"
-        />
+        android:paddingTop="10dip"
+        android:textSize="35dip"
+        android:id="@+id/text"
+        android:layout_gravity="center" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView"
+        android:src="@drawable/healthcare" />
 
     <EditText android:id="@+id/inputPESEL"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dip"
+        android:layout_margin="0dp"
         android:layout_marginBottom="15dip"
         android:singleLine="true"
-        android:textColor="@color/zolty"
+        android:textColor="@color/dark_gray"
         android:textSize="30dip"
-        android:inputType="numberDecimal"/>
+        android:inputType="numberDecimal"
+        android:layout_marginTop="0dp"
+        android:layout_weight="0.28" />
 
     <Button android:id="@+id/btnContinue"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="307dp"
+        android:layout_height="65dp"
         android:textColor="@color/white"
         android:textSize="25dip"
         android:text="@string/btnContinue"
-        android:layout_marginTop="100dip"
-        android:layout_weight="0.14" />
+        android:clickable="true"
+        android:layout_marginTop="20dp"
+        android:background="@color/dark_gray" />
 
 
 </LinearLayout>
